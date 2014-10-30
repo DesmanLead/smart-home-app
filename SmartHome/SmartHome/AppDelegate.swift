@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,9 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        let beaconUUID = NSUUID(UUIDString: "EBEFD083-70A2-47C8-9837-E7B5634DF524")
-        let beaconIdentifier = "WorkBeacon"
-        let beaconRegion = CLBeaconRegion(proximityUUID: beaconUUID, identifier:beaconIdentifier)
+        let db = Database.sharedDatabase()
+        Monitor.start(db.getBeacons())
         
         return true
     }

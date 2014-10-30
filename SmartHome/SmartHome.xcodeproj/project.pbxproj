@@ -15,6 +15,9 @@
 		7C60D6051A014886009D8055 /* SmartHomeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60D6041A014886009D8055 /* SmartHomeTests.swift */; };
 		7C60D60F1A0148D1009D8055 /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C60D60E1A0148D1009D8055 /* HomeKit.framework */; };
 		7C60D6121A014AF3009D8055 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C60D6111A014AF3009D8055 /* CoreLocation.framework */; };
+		7CB2CC4C1A0261E60025AB04 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2CC4B1A0261E60025AB04 /* Database.swift */; };
+		7CB2CC501A0262650025AB04 /* Beacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2CC4F1A0262650025AB04 /* Beacon.swift */; };
+		7CB2CC521A02647D0025AB04 /* Monitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2CC511A02647D0025AB04 /* Monitor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +44,9 @@
 		7C60D60E1A0148D1009D8055 /* HomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HomeKit.framework; path = System/Library/Frameworks/HomeKit.framework; sourceTree = SDKROOT; };
 		7C60D6101A0148D1009D8055 /* SmartHome.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SmartHome.entitlements; sourceTree = "<group>"; };
 		7C60D6111A014AF3009D8055 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		7CB2CC4B1A0261E60025AB04 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		7CB2CC4F1A0262650025AB04 /* Beacon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Beacon.swift; sourceTree = "<group>"; };
+		7CB2CC511A02647D0025AB04 /* Monitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monitor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,13 +92,8 @@
 		7C60D5EB1A014886009D8055 /* SmartHome */ = {
 			isa = PBXGroup;
 			children = (
-				7C60D6101A0148D1009D8055 /* SmartHome.entitlements */,
-				7C60D5EE1A014886009D8055 /* AppDelegate.swift */,
-				7C60D5F01A014886009D8055 /* ViewController.swift */,
-				7C60D5F21A014886009D8055 /* Main.storyboard */,
-				7C60D5F51A014886009D8055 /* Images.xcassets */,
-				7C60D5F71A014886009D8055 /* LaunchScreen.xib */,
-				7C60D5EC1A014886009D8055 /* Supporting Files */,
+				7CB2CC4E1A0262070025AB04 /* Resources */,
+				7CB2CC4D1A0261F10025AB04 /* Sources */,
 			);
 			path = SmartHome;
 			sourceTree = "<group>";
@@ -120,6 +121,30 @@
 				7C60D6031A014886009D8055 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7CB2CC4D1A0261F10025AB04 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				7C60D5EE1A014886009D8055 /* AppDelegate.swift */,
+				7C60D5F01A014886009D8055 /* ViewController.swift */,
+				7CB2CC4B1A0261E60025AB04 /* Database.swift */,
+				7CB2CC4F1A0262650025AB04 /* Beacon.swift */,
+				7CB2CC511A02647D0025AB04 /* Monitor.swift */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		7CB2CC4E1A0262070025AB04 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7C60D5EC1A014886009D8055 /* Supporting Files */,
+				7C60D5F21A014886009D8055 /* Main.storyboard */,
+				7C60D5F71A014886009D8055 /* LaunchScreen.xib */,
+				7C60D5F51A014886009D8055 /* Images.xcassets */,
+				7C60D6101A0148D1009D8055 /* SmartHome.entitlements */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,8 +256,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CB2CC4C1A0261E60025AB04 /* Database.swift in Sources */,
+				7CB2CC521A02647D0025AB04 /* Monitor.swift in Sources */,
 				7C60D5F11A014886009D8055 /* ViewController.swift in Sources */,
 				7C60D5EF1A014886009D8055 /* AppDelegate.swift in Sources */,
+				7CB2CC501A0262650025AB04 /* Beacon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +460,7 @@
 				7C60D60A1A014886009D8055 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7C60D60B1A014886009D8055 /* Build configuration list for PBXNativeTarget "SmartHomeTests" */ = {
 			isa = XCConfigurationList;
@@ -440,6 +469,7 @@
 				7C60D60D1A014886009D8055 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
