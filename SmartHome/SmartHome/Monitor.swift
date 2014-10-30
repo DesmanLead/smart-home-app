@@ -10,14 +10,45 @@ import Foundation
 import CoreLocation
 
 class Monitor {
+    private class LocationHandler: NSObject, CLLocationManagerDelegate {
+        func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: [AnyObject]!, inRegion region: CLBeaconRegion!) {
+            for beacon: CLBeacon in beacons as [CLBeacon] {
+                println("DEADBEEF id.: \(region.identifier); prox.: \(beacon.proximity)")
+            }
+        }
+    }
+    
+    private class func locationManager() -> CLLocationManager {
+        struct Holder {
+            static let instance: CLLocationManager = CLLocationManager()
+        }
+        
+        return Holder.instance
+    }
+    
     class func start(beacons: [Beacon]) {
         stop()
         
         let beaconUUID = NSUUID(UUIDString: "EBEFD083-70A2-47C8-9837-E7B5634DF524")
         let beaconIdentifier = "WorkBeacon"
         let beaconRegion = CLBeaconRegion(proximityUUID: beaconUUID, identifier:beaconIdentifier)
+        beaconRegion.notifyEntryStateOnDisplay = true
+        
+        let lm = locationManager()
+        lm.delegate = LocationHandler()
+        lm.startMonitoringForRegion(beaconRegion)
+        lm.startRangingBeaconsInRegion(beaconRegion)
     }
     
     class func stop() {
+        let lm = locationManager()
+        
+        let beaconUUID = NSUUID(UUIDString: "EBEFD083-70A2-47C8-9837-E7B5634DF524")
+        let beaconIdentifier = "WorkBeacon"
+        let beaconRegion = CLBeaconRegion(proximityUUID: beaconUUID, identifier:beaconIdentifier)
+        beaconRegion.notifyEntryStateOnDisplay = true
+
+        lm.stopRangingBeaconsInRegion(beaconRegion)
+        lm.stopMonitoringForRegion(beaconRegion)
     }
 }
