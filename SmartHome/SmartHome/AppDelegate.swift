@@ -12,13 +12,13 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var locationHandler: Monitor.LocationHandler?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
         let db = Database.sharedDatabase()
-        Monitor.start(db.getBeacons())
+        locationHandler = Monitor.start(db.getBeacons())
         
         return true
     }

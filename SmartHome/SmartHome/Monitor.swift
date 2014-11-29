@@ -10,7 +10,7 @@ import Foundation
 import CoreLocation
 
 class Monitor {
-    private class LocationHandler: NSObject, CLLocationManagerDelegate {
+    class LocationHandler: NSObject, CLLocationManagerDelegate {
         func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: [AnyObject]!, inRegion region: CLBeaconRegion!) {
             for beacon: CLBeacon in beacons as [CLBeacon] {
                 println("DEADBEEF id.: \(region.identifier); prox.: \(beacon.proximity)")
@@ -26,7 +26,7 @@ class Monitor {
         return Holder.instance
     }
     
-    class func start(beacons: [Beacon]) {
+    class func start(beacons: [Beacon]) -> LocationHandler {
         stop()
         
         let beaconUUID = NSUUID(UUIDString: "EBEFD083-70A2-47C8-9837-E7B5634DF524")
@@ -35,9 +35,12 @@ class Monitor {
         beaconRegion.notifyEntryStateOnDisplay = true
         
         let lm = locationManager()
-        lm.delegate = LocationHandler()
+        let handler = LocationHandler()
+        lm.delegate = handler
         lm.startMonitoringForRegion(beaconRegion)
         lm.startRangingBeaconsInRegion(beaconRegion)
+        
+        return handler
     }
     
     class func stop() {
