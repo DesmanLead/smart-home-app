@@ -9,6 +9,13 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    @IBAction func onStart() {
+    }
+    
+    @IBAction func onStop() {
+        Monitor.stop()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

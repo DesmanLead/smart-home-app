@@ -17,7 +17,7 @@ class Database {
         return Holder.instance
     }
     
-    func setRange(Int64, beacon: Beacon, time: TimeValue64) {
+    func setRange(Int64, beacon: Beacon, time: NSDate) {
         // Save entry to DB
         assertionFailure("Not implemented")
     }

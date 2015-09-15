@@ -12,7 +12,7 @@ import CoreLocation
 class Monitor {
     class LocationHandler: NSObject, CLLocationManagerDelegate {
         func locationManager(manager: CLLocationManager!, didRangeBeacons beacons: [AnyObject]!, inRegion region: CLBeaconRegion!) {
-            for beacon: CLBeacon in beacons as [CLBeacon] {
+            for beacon: CLBeacon in beacons as! [CLBeacon] {
                 println("DEADBEEF id.: \(region.identifier); prox.: \(beacon.proximity)")
             }
         }
