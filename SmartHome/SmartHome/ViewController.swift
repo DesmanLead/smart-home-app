@@ -9,24 +9,35 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet weak var label: UILabel!
     
     @IBAction func onStart() {
+        label.text = "started"
+        
+        let db = Database.sharedDatabase()
+        Monitor.start(db.getBeacons())
     }
     
     @IBAction func onStop() {
         Monitor.stop()
+        
+        label.text = "stopped"
     }
-
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        label.text = ""
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func onRangeData(notification: NSNotification) {
+        label.text = notification.userInfo?.description
     }
-
-
+    
+    override func viewWillAppear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onRangeData:", name: Monitor.RangeNotification.Name, object: nil)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
 }
 

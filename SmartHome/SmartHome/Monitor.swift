@@ -10,10 +10,26 @@ import Foundation
 import CoreLocation
 
 class Monitor {
+    struct RangeNotification {
+        static let Name       = "SHRangeNotification"
+        static let Identifier = "SHRangeNotificationIdentifier"
+        static let Proximity  = "SHRangeNotificationProximity"
+        static let RSSI       = "SHRangeNotificationRSSI"
+    }
+    
+    
     class LocationHandler: NSObject, CLLocationManagerDelegate {
         func locationManager(manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], inRegion region: CLBeaconRegion) {
-            for beacon: CLBeacon in beacons {
-                print("DEADBEEF id.: \(region.identifier); prox.: \(beacon.proximity)")
+            for beacon: CLBeacon in beacons {                
+                let userInfo: [ NSObject : AnyObject ] = [
+                    RangeNotification.Identifier : region.identifier,
+                    RangeNotification.Proximity  : beacon.proximity.rawValue,
+                    RangeNotification.RSSI  : beacon.rssi
+                ]
+
+                let notification = NSNotification(name: RangeNotification.Name, object: self, userInfo: userInfo)
+                let nc = NSNotificationCenter.defaultCenter()
+                nc.postNotification(notification)
             }
         }
     }
@@ -26,7 +42,9 @@ class Monitor {
         return Holder.instance
     }
     
-    class func start(beacons: [Beacon]) -> LocationHandler {
+    static var handler: LocationHandler?
+    
+    class func start(beacons: [Beacon]) {
         stop()
         
         let beaconUUID = NSUUID(UUIDString: "EBEFD083-70A2-47C8-9837-E7B5634DF524")
@@ -40,7 +58,7 @@ class Monitor {
         lm.startMonitoringForRegion(beaconRegion)
         lm.startRangingBeaconsInRegion(beaconRegion)
         
-        return handler
+        self.handler = handler
     }
     
     class func stop() {
@@ -53,5 +71,7 @@ class Monitor {
 
         lm.stopRangingBeaconsInRegion(beaconRegion)
         lm.stopMonitoringForRegion(beaconRegion)
+        
+        self.handler = nil
     }
 }
