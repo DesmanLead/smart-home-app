@@ -18,8 +18,8 @@ class Monitor {
     }
     
     
-    class LocationHandler: NSObject, CLLocationManagerDelegate {
-        func locationManager(manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], inRegion region: CLBeaconRegion) {
+    private class LocationHandler: NSObject, CLLocationManagerDelegate {
+        @objc func locationManager(manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], inRegion region: CLBeaconRegion) {
             for beacon: CLBeacon in beacons {                
                 let userInfo: [ NSObject : AnyObject ] = [
                     RangeNotification.Identifier : region.identifier,
@@ -42,7 +42,7 @@ class Monitor {
         return Holder.instance
     }
     
-    static var handler: LocationHandler?
+    private static var handler: LocationHandler?
     
     class func start(beacons: [Beacon]) {
         stop()
