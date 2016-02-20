@@ -53,6 +53,8 @@ class Monitor {
         beaconRegion.notifyEntryStateOnDisplay = true
         
         let lm = locationManager()
+        lm.requestAlwaysAuthorization()
+        
         let handler = LocationHandler()
         lm.delegate = handler
         lm.startMonitoringForRegion(beaconRegion)

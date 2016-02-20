@@ -13,10 +13,10 @@
 		7C60D5F61A014886009D8055 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C60D5F51A014886009D8055 /* Images.xcassets */; };
 		7C60D5F91A014886009D8055 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C60D5F71A014886009D8055 /* LaunchScreen.xib */; };
 		7C60D6051A014886009D8055 /* SmartHomeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60D6041A014886009D8055 /* SmartHomeTests.swift */; };
-		7C60D6121A014AF3009D8055 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C60D6111A014AF3009D8055 /* CoreLocation.framework */; };
 		7CB2CC4C1A0261E60025AB04 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2CC4B1A0261E60025AB04 /* Database.swift */; };
 		7CB2CC501A0262650025AB04 /* Beacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2CC4F1A0262650025AB04 /* Beacon.swift */; };
 		7CB2CC521A02647D0025AB04 /* Monitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2CC511A02647D0025AB04 /* Monitor.swift */; };
+		7CBA15FD1C78AFAE00DF4DA1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C60D6111A014AF3009D8055 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C60D6121A014AF3009D8055 /* CoreLocation.framework in Frameworks */,
+				7CBA15FD1C78AFAE00DF4DA1 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,7 +384,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SmartHome/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.desman.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -399,7 +399,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = SmartHome/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.desman.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
