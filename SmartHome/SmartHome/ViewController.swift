@@ -14,12 +14,11 @@ class ViewController: UIViewController {
     @IBAction func onStart() {
         label.text = "started"
         
-        let db = Database.sharedDatabase()
-        Monitor.start(db.getBeacons())
+        Monitor.start(Database.sharedDatabase.getBeacons())
     }
     
     @IBAction func onStop() {
-        Monitor.stop()
+        Monitor.stop(Database.sharedDatabase.getBeacons())
         
         label.text = "stopped"
     }
@@ -33,7 +32,7 @@ class ViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onRangeData:", name: Monitor.RangeNotification.Name, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.onRangeData(_:)), name: Monitor.RangeNotification.Name, object: nil)
     }
     
     override func viewWillDisappear(animated: Bool) {

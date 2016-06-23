@@ -9,8 +9,8 @@
 import Foundation
 
 class Beacon {
-    var name: String!
-    var uuid: String!
+    let name: String
+    let uuid: String
     
     init(name: String, uuid: String) {
         self.name = name

@@ -45,34 +45,39 @@ class Monitor {
     private static var handler: LocationHandler?
     
     class func start(beacons: [Beacon]) {
-        stop()
-        
-        let beaconUUID = NSUUID(UUIDString: "EBEFD083-70A2-47C8-9837-E7B5634DF524")
-        let beaconIdentifier = "WorkBeacon"
-        let beaconRegion = CLBeaconRegion(proximityUUID: beaconUUID!, identifier:beaconIdentifier)
-        beaconRegion.notifyEntryStateOnDisplay = true
+        stop(beacons)
         
         let lm = locationManager()
         lm.requestAlwaysAuthorization()
         
         let handler = LocationHandler()
         lm.delegate = handler
-        lm.startMonitoringForRegion(beaconRegion)
-        lm.startRangingBeaconsInRegion(beaconRegion)
+        
+        for beacon in beacons {
+            let beaconUUID = NSUUID(UUIDString: beacon.uuid)
+            let beaconIdentifier = beacon.name
+            let beaconRegion = CLBeaconRegion(proximityUUID: beaconUUID!, identifier:beaconIdentifier)
+            beaconRegion.notifyEntryStateOnDisplay = true
+            
+            lm.startMonitoringForRegion(beaconRegion)
+            lm.startRangingBeaconsInRegion(beaconRegion)
+        }
         
         self.handler = handler
     }
     
-    class func stop() {
+    class func stop(beacons: [Beacon]) {
         let lm = locationManager()
         
-        let beaconUUID = NSUUID(UUIDString: "EBEFD083-70A2-47C8-9837-E7B5634DF524")
-        let beaconIdentifier = "WorkBeacon"
-        let beaconRegion = CLBeaconRegion(proximityUUID: beaconUUID!, identifier:beaconIdentifier)
-        beaconRegion.notifyEntryStateOnDisplay = true
+        for beacon in beacons {
+            let beaconUUID = NSUUID(UUIDString: beacon.uuid)
+            let beaconIdentifier = beacon.name
+            let beaconRegion = CLBeaconRegion(proximityUUID: beaconUUID!, identifier:beaconIdentifier)
+            beaconRegion.notifyEntryStateOnDisplay = true
 
-        lm.stopRangingBeaconsInRegion(beaconRegion)
-        lm.stopMonitoringForRegion(beaconRegion)
+            lm.stopRangingBeaconsInRegion(beaconRegion)
+            lm.stopMonitoringForRegion(beaconRegion)
+        }
         
         self.handler = nil
     }

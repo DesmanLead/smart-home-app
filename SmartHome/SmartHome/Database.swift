@@ -9,13 +9,7 @@
 import Foundation
 
 class Database {
-    class func sharedDatabase() -> Database {
-        struct Holder {
-            static let instance : Database = Database()
-        }
-        
-        return Holder.instance
-    }
+    static let sharedDatabase = Database()
     
     func setRange(_: Int64, beacon: Beacon, time: NSDate) {
         // Save entry to DB
@@ -29,7 +23,7 @@ class Database {
     
     func getBeacons() -> [Beacon] {
         return [
-            Beacon(name: "WorkBeacon", uuid: "")
+            Beacon(name: "WorkBeacon", uuid: "EBEFD083-70A2-47C8-9837-E7B5634DF524")
         ]
     }
 }
