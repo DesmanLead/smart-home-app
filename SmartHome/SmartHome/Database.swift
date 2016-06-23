@@ -11,14 +11,16 @@ import Foundation
 class Database {
     static let sharedDatabase = Database()
     
-    func setRange(_: Int64, beacon: Beacon, time: NSDate) {
+    func setRange(range: Int, beacon: Beacon, time: NSDate) {
         // Save entry to DB
-        assertionFailure("Not implemented")
+        print("\(time) <\(beacon.uuid):\(range)>")
     }
     
     func dump() {
         // Dump database for further investigtion
-        assertionFailure("Not implemented")
+        // 1. Export DB content to .csv
+        // 2. Clean DB
+        print("dump")
     }
     
     func getBeacons() -> [Beacon] {

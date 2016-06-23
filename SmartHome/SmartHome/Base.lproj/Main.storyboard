@@ -3,8 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -20,28 +18,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="guB-I3-YM5">
-                                <rect key="frame" x="20" y="20" width="34" height="30"/>
-                                <state key="normal" title="Start">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onStart" destination="vXZ-lx-hvc" eventType="touchUpInside" id="efM-VK-fpX"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vRP-YB-4hQ">
-                                <rect key="frame" x="548" y="20" width="32" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="HtQ-F9-qfZ"/>
-                                </constraints>
-                                <state key="normal" title="Stop">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onStop" destination="vXZ-lx-hvc" eventType="touchUpInside" id="3kj-bE-FMN"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Lorem ipsum lorem ipsum lorem ipsum lorem ipsum" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kbA-Yq-zEm">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ejy-am-I36">
+                                <rect key="frame" x="20" y="20" width="560" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="guB-I3-YM5">
+                                        <rect key="frame" x="0.0" y="0.0" width="187" height="30"/>
+                                        <state key="normal" title="Start">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onStart" destination="vXZ-lx-hvc" eventType="touchUpInside" id="efM-VK-fpX"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vRP-YB-4hQ">
+                                        <rect key="frame" x="187" y="0.0" width="186" height="30"/>
+                                        <state key="normal" title="Stop">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onStop" destination="vXZ-lx-hvc" eventType="touchUpInside" id="3kj-bE-FMN"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fSx-lO-loW">
+                                        <rect key="frame" x="373" y="0.0" width="187" height="30"/>
+                                        <state key="normal" title="Dump"/>
+                                        <connections>
+                                            <action selector="onDump" destination="vXZ-lx-hvc" eventType="touchUpInside" id="JGd-6v-YYY"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="200" text="Lorem ipsum lorem ipsum lorem ipsum lorem ipsum" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kbA-Yq-zEm">
                                 <rect key="frame" x="20" y="58" width="560" height="534"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="534" id="7jI-5H-uVH"/>
@@ -58,24 +65,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="kbA-Yq-zEm" firstAttribute="leading" secondItem="guB-I3-YM5" secondAttribute="leading" id="05c-FF-3G1"/>
-                            <constraint firstItem="vRP-YB-4hQ" firstAttribute="baseline" secondItem="guB-I3-YM5" secondAttribute="firstBaseline" id="1iB-f1-RCp"/>
-                            <constraint firstItem="vRP-YB-4hQ" firstAttribute="firstBaseline" secondItem="guB-I3-YM5" secondAttribute="baseline" id="7Ep-kD-yyt"/>
-                            <constraint firstItem="kbA-Yq-zEm" firstAttribute="top" secondItem="guB-I3-YM5" secondAttribute="bottom" constant="8" symbolic="YES" id="DlU-5I-04l"/>
-                            <constraint firstItem="vRP-YB-4hQ" firstAttribute="top" secondItem="guB-I3-YM5" secondAttribute="top" id="G0U-q2-wWX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="kbA-Yq-zEm" secondAttribute="trailing" id="OQe-uW-iNe"/>
-                            <constraint firstItem="kbA-Yq-zEm" firstAttribute="trailing" secondItem="vRP-YB-4hQ" secondAttribute="trailing" id="Sjd-zg-nwC"/>
-                            <constraint firstItem="vRP-YB-4hQ" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="V3I-ly-uEa"/>
-                            <constraint firstItem="guB-I3-YM5" firstAttribute="baseline" secondItem="vRP-YB-4hQ" secondAttribute="baseline" id="Xgd-cj-OMS"/>
-                            <constraint firstItem="vRP-YB-4hQ" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="ZK2-Y7-utA"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ejy-am-I36" secondAttribute="trailing" id="PXC-bL-mr2"/>
+                            <constraint firstItem="ejy-am-I36" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="Riu-Br-Lq8"/>
+                            <constraint firstItem="kbA-Yq-zEm" firstAttribute="top" secondItem="ejy-am-I36" secondAttribute="bottom" constant="8" symbolic="YES" id="TZ1-B1-8D4"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="kbA-Yq-zEm" secondAttribute="bottom" constant="8" symbolic="YES" id="gLH-YD-MF1"/>
-                            <constraint firstItem="guB-I3-YM5" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="isc-P8-cMc"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="ejy-am-I36" secondAttribute="leading" id="mhL-ez-VIT"/>
+                            <constraint firstItem="kbA-Yq-zEm" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="ufc-dr-OJS"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="OQe-uW-iNe"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="label" destination="kbA-Yq-zEm" id="hEP-pa-uTF"/>

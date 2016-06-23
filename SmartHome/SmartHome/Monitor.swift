@@ -20,17 +20,22 @@ class Monitor {
     
     private class LocationHandler: NSObject, CLLocationManagerDelegate {
         @objc func locationManager(manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], inRegion region: CLBeaconRegion) {
+            var userInfo: [NSObject:AnyObject] = [:]
+            
             for beacon: CLBeacon in beacons {                
-                let userInfo: [ NSObject : AnyObject ] = [
-                    RangeNotification.Identifier : region.identifier,
+                let beaconInfo: [NSObject:AnyObject] = [
+//                    RangeNotification.Identifier : beacon.proximityUUID.UUIDString,
+                    RangeNotification.Name : region.identifier,
                     RangeNotification.Proximity  : beacon.proximity.rawValue,
                     RangeNotification.RSSI  : beacon.rssi
                 ]
-
-                let notification = NSNotification(name: RangeNotification.Name, object: self, userInfo: userInfo)
-                let nc = NSNotificationCenter.defaultCenter()
-                nc.postNotification(notification)
+                
+                userInfo[beacon.proximityUUID.UUIDString] = beaconInfo
             }
+            
+            let notification = NSNotification(name: RangeNotification.Name, object: self, userInfo: userInfo)
+            let nc = NSNotificationCenter.defaultCenter()
+            nc.postNotification(notification)
         }
     }
     
