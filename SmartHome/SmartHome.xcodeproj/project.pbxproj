@@ -17,6 +17,8 @@
 		7CB2CC501A0262650025AB04 /* Beacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2CC4F1A0262650025AB04 /* Beacon.swift */; };
 		7CB2CC521A02647D0025AB04 /* Monitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2CC511A02647D0025AB04 /* Monitor.swift */; };
 		7CBA15FD1C78AFAE00DF4DA1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C60D6111A014AF3009D8055 /* CoreLocation.framework */; };
+		D2B4A4E047FBD1925412CB63 /* libPods-SmartHomeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8211078C00CFC8BEAFAD6C76 /* libPods-SmartHomeTests.a */; };
+		F2CB13FD8AA070E4BE7E4CF0 /* libPods-SmartHome.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15F0D0E0AF74587D4251C052 /* libPods-SmartHome.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,6 +32,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		15F0D0E0AF74587D4251C052 /* libPods-SmartHome.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SmartHome.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A18B954B55BC0C9282DE6D2 /* Pods-SmartHome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.debug.xcconfig"; sourceTree = "<group>"; };
+		3DF47169EBB2A6F55A77A8A9 /* Pods-SmartHomeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHomeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHomeTests/Pods-SmartHomeTests.release.xcconfig"; sourceTree = "<group>"; };
 		7C60D5E91A014886009D8055 /* SmartHome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartHome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C60D5ED1A014886009D8055 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C60D5EE1A014886009D8055 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -44,6 +49,9 @@
 		7CB2CC4B1A0261E60025AB04 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		7CB2CC4F1A0262650025AB04 /* Beacon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Beacon.swift; sourceTree = "<group>"; };
 		7CB2CC511A02647D0025AB04 /* Monitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monitor.swift; sourceTree = "<group>"; };
+		8211078C00CFC8BEAFAD6C76 /* libPods-SmartHomeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SmartHomeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BA372FE63023CF3C00E3AAB /* Pods-SmartHomeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHomeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHomeTests/Pods-SmartHomeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9C6694F5E3017B7C6987F6C2 /* Pods-SmartHome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +60,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CBA15FD1C78AFAE00DF4DA1 /* CoreLocation.framework in Frameworks */,
+				F2CB13FD8AA070E4BE7E4CF0 /* libPods-SmartHome.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,12 +68,33 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2B4A4E047FBD1925412CB63 /* libPods-SmartHomeTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03FDA2DB1033491844DD6790 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1A18B954B55BC0C9282DE6D2 /* Pods-SmartHome.debug.xcconfig */,
+				9C6694F5E3017B7C6987F6C2 /* Pods-SmartHome.release.xcconfig */,
+				8BA372FE63023CF3C00E3AAB /* Pods-SmartHomeTests.debug.xcconfig */,
+				3DF47169EBB2A6F55A77A8A9 /* Pods-SmartHomeTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		61CB1DE3F349495A97032342 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				15F0D0E0AF74587D4251C052 /* libPods-SmartHome.a */,
+				8211078C00CFC8BEAFAD6C76 /* libPods-SmartHomeTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7C60D5E01A014885009D8055 = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +102,8 @@
 				7C60D5EB1A014886009D8055 /* SmartHome */,
 				7C60D6011A014886009D8055 /* SmartHomeTests */,
 				7C60D5EA1A014886009D8055 /* Products */,
+				03FDA2DB1033491844DD6790 /* Pods */,
+				61CB1DE3F349495A97032342 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -148,9 +180,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7C60D6081A014886009D8055 /* Build configuration list for PBXNativeTarget "SmartHome" */;
 			buildPhases = (
+				B07233D33F2F2DA9380CBEA4 /* 📦 Check Pods Manifest.lock */,
 				7C60D5E51A014885009D8055 /* Sources */,
 				7C60D5E61A014885009D8055 /* Frameworks */,
 				7C60D5E71A014885009D8055 /* Resources */,
+				FB2F2DA69F00581E8504510B /* 📦 Embed Pods Frameworks */,
+				905917DA95CC0FBB4E9C5D4C /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -165,9 +200,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7C60D60B1A014886009D8055 /* Build configuration list for PBXNativeTarget "SmartHomeTests" */;
 			buildPhases = (
+				33367B7FE6718B4EC235DB00 /* 📦 Check Pods Manifest.lock */,
 				7C60D5FA1A014886009D8055 /* Sources */,
 				7C60D5FB1A014886009D8055 /* Frameworks */,
 				7C60D5FC1A014886009D8055 /* Resources */,
+				BCF9924507D15993F79B6D89 /* 📦 Embed Pods Frameworks */,
+				C9675FB42666D2DC6B4B04B7 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -246,6 +284,99 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		33367B7FE6718B4EC235DB00 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		905917DA95CC0FBB4E9C5D4C /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B07233D33F2F2DA9380CBEA4 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		BCF9924507D15993F79B6D89 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartHomeTests/Pods-SmartHomeTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C9675FB42666D2DC6B4B04B7 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartHomeTests/Pods-SmartHomeTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FB2F2DA69F00581E8504510B /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7C60D5E51A014885009D8055 /* Sources */ = {
@@ -379,6 +510,7 @@
 		};
 		7C60D6091A014886009D8055 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1A18B954B55BC0C9282DE6D2 /* Pods-SmartHome.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -394,6 +526,7 @@
 		};
 		7C60D60A1A014886009D8055 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C6694F5E3017B7C6987F6C2 /* Pods-SmartHome.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -409,6 +542,7 @@
 		};
 		7C60D60C1A014886009D8055 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8BA372FE63023CF3C00E3AAB /* Pods-SmartHomeTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -429,6 +563,7 @@
 		};
 		7C60D60D1A014886009D8055 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3DF47169EBB2A6F55A77A8A9 /* Pods-SmartHomeTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
