@@ -27,14 +27,23 @@ class Database {
     
     private let isolationQueue = dispatch_queue_create("CSV writing queue", DISPATCH_QUEUE_SERIAL)
     
-    func setRange(range: Int, beacon: Beacon, time: NSDate) {
-        let csv = "\(time.timeIntervalSince1970);\(beacon.uuid);\(range);\(beacon.name)\n"
-        print(csv)
-        
+    private func writeLine(line: String) {
         dispatch_async(isolationQueue) {
             self.fileHandle.seekToEndOfFile()
-            self.fileHandle.writeData(csv.dataUsingEncoding(NSUTF8StringEncoding)!)
+            self.fileHandle.writeData(line.dataUsingEncoding(NSUTF8StringEncoding)!)
         }
+    }
+    
+    func logRange(range: Int, forBeacon beacon: Beacon, time: NSDate) {
+        let csv = "\(time.timeIntervalSince1970);\(beacon.uuid);\(range);\(beacon.name)\n"
+        print(csv)
+        writeLine(csv)
+    }
+    
+    func logDeviceState(device: Device, time: NSDate) {
+        let csv = "\(time.timeIntervalSince1970);\(device.identifier);\(device.isEnabled ? 1 : 0);\(device.name)\n"
+        print(csv)
+        writeLine(csv)
     }
     
     func dump() {

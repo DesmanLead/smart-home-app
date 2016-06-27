@@ -48,7 +48,7 @@ class ViewController: UIViewController, UITableViewDataSource {
                 else { return }
                 
                 let beacon = Beacon(name: name, uuid: uuid)
-                Database.sharedDatabase.setRange(rssi, beacon: beacon, time: currentTime)
+                Database.sharedDatabase.logRange(rssi, forBeacon: beacon, time: currentTime)
             }
         }
     }
@@ -78,7 +78,10 @@ class ViewController: UIViewController, UITableViewDataSource {
         
         cell.onDeviceEnabled = {
             isEnabled in
-            print("\(device.identifier) = \(isEnabled)")
+            
+            var updatedDevice = device
+            updatedDevice.isEnabled = isEnabled
+            Database.sharedDatabase.logDeviceState(updatedDevice, time: NSDate())
         }
         
         return cell
