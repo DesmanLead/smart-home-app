@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var devicesTable: UITableView!
     var devices: [Device]!
@@ -32,7 +32,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         devices = Database.sharedDatabase.getDevices()
         label.text = ""
-        devicesTable.delegate = self
         devicesTable.dataSource = self
     }
     
@@ -76,6 +75,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         cell.deviceName = device.name
         cell.deviceEnabled = device.isEnabled
+        
+        cell.onDeviceEnabled = {
+            isEnabled in
+            print("\(device.identifier) = \(isEnabled)")
+        }
         
         return cell
     }

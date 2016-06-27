@@ -37,7 +37,6 @@ class DeviceTableCell: UITableViewCell {
     @IBOutlet weak var isEnabledSwitch: UISwitch!
     
     @IBAction func onSwitch(sender: UISwitch, forEvent event: UIEvent) {
-        print("\(nameLabel.text) = \(sender.on)")
         onDeviceEnabled?(sender.on)
     }
 }
