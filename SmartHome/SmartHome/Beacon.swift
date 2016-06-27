@@ -8,12 +8,7 @@
 
 import Foundation
 
-class Beacon {
+struct Beacon {
     let name: String
     let uuid: String
-    
-    init(name: String, uuid: String) {
-        self.name = name
-        self.uuid = uuid
-    }
 }

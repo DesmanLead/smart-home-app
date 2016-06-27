@@ -51,4 +51,14 @@ class Database {
             Beacon(name: "WorkBeacon", uuid: "EBEFD083-70A2-47C8-9837-E7B5634DF524")
         ]
     }
+    
+    func getDevices() -> [Device] {
+        return [
+            Device(name: "Kitchen Light", isEnabled: false),
+            Device(name: "Bedroom Light", isEnabled: false),
+            Device(name: "Bathroom Light", isEnabled: false),
+            Device(name: "Toilet Light", isEnabled: false),
+            Device(name: "Hall Light", isEnabled: false)
+        ]
+    }
 }

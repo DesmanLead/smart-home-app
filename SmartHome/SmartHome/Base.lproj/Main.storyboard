@@ -49,9 +49,10 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="200" text="Lorem ipsum lorem ipsum lorem ipsum lorem ipsum" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kbA-Yq-zEm">
-                                <rect key="frame" x="20" y="58" width="560" height="534"/>
+                                <rect key="frame" x="20" y="58" width="560" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="534" id="7jI-5H-uVH"/>
+                                    <constraint firstAttribute="height" constant="40" id="taU-dd-kcf"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -62,19 +63,80 @@
                                     </mask>
                                 </variation>
                             </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Mxw-Gd-8Wg">
+                                <rect key="frame" x="20" y="106" width="560" height="474"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="476" id="vDA-10-T0A"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="deviceCell" id="XaN-QP-UNE" customClass="DeviceTableCell" customModule="SmartHome" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="560" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XaN-QP-UNE" id="M0t-UJ-GWM">
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iut-qn-goh">
+                                                    <rect key="frame" x="503" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="onSwitch:forEvent:" destination="XaN-QP-UNE" eventType="valueChanged" id="z82-0G-FGo"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kitchen Light" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfd-d4-N2h">
+                                                    <rect key="frame" x="8" y="11" width="495" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="gfd-d4-N2h" firstAttribute="leading" secondItem="M0t-UJ-GWM" secondAttribute="leadingMargin" id="7nf-rp-UE4"/>
+                                                <constraint firstItem="iut-qn-goh" firstAttribute="centerY" secondItem="M0t-UJ-GWM" secondAttribute="centerY" id="9H8-no-fkN"/>
+                                                <constraint firstItem="gfd-d4-N2h" firstAttribute="centerY" secondItem="iut-qn-goh" secondAttribute="centerY" id="eek-bx-dAi"/>
+                                                <constraint firstItem="iut-qn-goh" firstAttribute="trailing" secondItem="M0t-UJ-GWM" secondAttribute="trailingMargin" id="rgQ-EJ-2pz"/>
+                                                <constraint firstItem="gfd-d4-N2h" firstAttribute="trailing" secondItem="iut-qn-goh" secondAttribute="leading" id="s31-bN-LFn"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="isEnabledSwitch" destination="iut-qn-goh" id="TqU-My-g1f"/>
+                                            <outlet property="nameLabel" destination="gfd-d4-N2h" id="OWv-HT-SPi"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="vDA-10-T0A"/>
+                                    </mask>
+                                </variation>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Mxw-Gd-8Wg" firstAttribute="top" secondItem="kbA-Yq-zEm" secondAttribute="bottom" constant="8" symbolic="YES" id="6Di-Py-M6w"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Mxw-Gd-8Wg" secondAttribute="leading" id="87Y-5q-zz1"/>
+                            <constraint firstItem="Mxw-Gd-8Wg" firstAttribute="leading" secondItem="kbA-Yq-zEm" secondAttribute="leading" id="Apj-sj-64w"/>
                             <constraint firstAttribute="trailingMargin" secondItem="kbA-Yq-zEm" secondAttribute="trailing" id="OQe-uW-iNe"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ejy-am-I36" secondAttribute="trailing" id="PXC-bL-mr2"/>
                             <constraint firstItem="ejy-am-I36" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="Riu-Br-Lq8"/>
                             <constraint firstItem="kbA-Yq-zEm" firstAttribute="top" secondItem="ejy-am-I36" secondAttribute="bottom" constant="8" symbolic="YES" id="TZ1-B1-8D4"/>
+                            <constraint firstItem="Mxw-Gd-8Wg" firstAttribute="trailing" secondItem="kbA-Yq-zEm" secondAttribute="trailing" id="XDM-pw-mQJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Mxw-Gd-8Wg" secondAttribute="trailing" id="f2b-zO-9l5"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="kbA-Yq-zEm" secondAttribute="bottom" constant="8" symbolic="YES" id="gLH-YD-MF1"/>
+                            <constraint firstAttribute="bottom" secondItem="Mxw-Gd-8Wg" secondAttribute="bottom" constant="20" symbolic="YES" id="h3a-rG-uba"/>
                             <constraint firstAttribute="leadingMargin" secondItem="ejy-am-I36" secondAttribute="leading" id="mhL-ez-VIT"/>
                             <constraint firstItem="kbA-Yq-zEm" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="ufc-dr-OJS"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Apj-sj-64w"/>
+                                <exclude reference="XDM-pw-mQJ"/>
+                                <exclude reference="gLH-YD-MF1"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
+                        <outlet property="devicesTable" destination="Mxw-Gd-8Wg" id="pDk-aR-BoL"/>
                         <outlet property="label" destination="kbA-Yq-zEm" id="hEP-pa-uTF"/>
                     </connections>
                 </viewController>

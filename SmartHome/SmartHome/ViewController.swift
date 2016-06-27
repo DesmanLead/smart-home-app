@@ -8,8 +8,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var devicesTable: UITableView!
+    var devices: [Device]!
     
     @IBAction func onStart() {
         label.text = "started"
@@ -28,7 +30,10 @@ class ViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        devices = Database.sharedDatabase.getDevices()
         label.text = ""
+        devicesTable.delegate = self
+        devicesTable.dataSource = self
     }
     
     func onRangeData(notification: NSNotification) {
@@ -55,6 +60,24 @@ class ViewController: UIViewController {
     
     override func viewWillDisappear(animated: Bool) {
         NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    
+    // MARK: - UITableViewDataSource
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return devices.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCellWithIdentifier("deviceCell") as? DeviceTableCell else { fatalError() }
+        
+        let device = devices[indexPath.row]
+        
+        cell.deviceName = device.name
+        cell.deviceEnabled = device.isEnabled
+        
+        return cell
     }
 }
 
