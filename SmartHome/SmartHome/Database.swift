@@ -11,6 +11,8 @@ import Foundation
 class Database {
     static let sharedDatabase = Database()
     
+    private static let Delimiter = ","
+    
     private static let filePath = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last!.URLByAppendingPathComponent("output.csv")
     private var fileHandle: NSFileHandle
     
@@ -28,20 +30,32 @@ class Database {
     private let isolationQueue = dispatch_queue_create("CSV writing queue", DISPATCH_QUEUE_SERIAL)
     
     private func writeLine(line: String) {
+        let processedLine = line + "\n"
+        
         dispatch_async(isolationQueue) {
             self.fileHandle.seekToEndOfFile()
-            self.fileHandle.writeData(line.dataUsingEncoding(NSUTF8StringEncoding)!)
+            self.fileHandle.writeData(processedLine.dataUsingEncoding(NSUTF8StringEncoding)!)
         }
     }
     
     func logRange(range: Int, forBeacon beacon: Beacon, time: NSDate) {
-        let csv = "\(time.timeIntervalSince1970);\(beacon.uuid);\(range);\(beacon.name)\n"
+        let csv = [
+            "\(time.timeIntervalSince1970)",
+            beacon.uuid,
+            "\(range)",
+            beacon.name
+        ].joinWithSeparator(Database.Delimiter)
         print(csv)
         writeLine(csv)
     }
     
     func logDeviceState(device: Device, time: NSDate) {
-        let csv = "\(time.timeIntervalSince1970);\(device.identifier);\(device.isEnabled ? 1 : 0);\(device.name)\n"
+        let csv = [
+            "\(time.timeIntervalSince1970)",
+            device.identifier,
+            "\(device.isEnabled ? 1 : 0)",
+            device.name
+        ].joinWithSeparator(Database.Delimiter)
         print(csv)
         writeLine(csv)
     }
