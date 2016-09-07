@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import CoreBluetooth
 
 class Monitor {
     struct RangeNotification {
@@ -17,6 +18,7 @@ class Monitor {
         static let RSSI       = "SHRangeNotificationRSSI"
     }
     
+    // MARK: - iBeacons handler
     
     private class LocationHandler: NSObject, CLLocationManagerDelegate {
         @objc func locationManager(manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], inRegion region: CLBeaconRegion) {
@@ -49,6 +51,28 @@ class Monitor {
     
     private static var handler: LocationHandler?
     
+    // MARK: - Bluetooth Devices handler
+    
+    private class BluetoothDevicesHandler: NSObject, CBCentralManagerDelegate {
+        @objc private func centralManagerDidUpdateState(central: CBCentralManager) {
+            if central.state == .PoweredOn {
+                central.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
+            }
+            else {
+                print(central.state)
+            }
+        }
+        
+        @objc private func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
+            print("\(peripheral.name) : \(RSSI)")
+        }
+    }
+    
+    private static var bluetoothCentralManager: CBCentralManager?
+    private static var bluetoothDevicesHandler: BluetoothDevicesHandler?
+    
+    // MARK: - Monotoring control
+    
     class func start(beacons: [Beacon]) {
         stop(beacons)
         
@@ -69,6 +93,10 @@ class Monitor {
         }
         
         self.handler = handler
+        
+        
+        bluetoothDevicesHandler = BluetoothDevicesHandler()
+        bluetoothCentralManager = CBCentralManager(delegate: bluetoothDevicesHandler, queue: nil)
     }
     
     class func stop(beacons: [Beacon]) {
@@ -85,5 +113,10 @@ class Monitor {
         }
         
         self.handler = nil
+        
+        
+        bluetoothCentralManager?.stopScan()
+        bluetoothDevicesHandler = nil
+        bluetoothCentralManager = nil
     }
 }

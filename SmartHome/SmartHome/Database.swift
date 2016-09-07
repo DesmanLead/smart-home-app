@@ -45,7 +45,7 @@ class Database {
             "\(range)",
             beacon.name
         ].joinWithSeparator(Database.Delimiter)
-        print(csv)
+        
         writeLine(csv)
     }
     
@@ -56,7 +56,7 @@ class Database {
             "\(device.isEnabled ? 1 : 0)",
             device.name
         ].joinWithSeparator(Database.Delimiter)
-        print(csv)
+        
         writeLine(csv)
     }
     
