@@ -37,20 +37,6 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     func onRangeData(notification: NSNotification) {
         label.text = notification.userInfo?.description
-        
-        if let beaconsInfo = notification.userInfo as? [String:[String:AnyObject]] {
-            
-            let currentTime = NSDate()
-            
-            for (uuid, parameters) in beaconsInfo {
-                guard let rssi = parameters[Monitor.RangeNotification.RSSI] as? Int,
-                      let name = parameters[Monitor.RangeNotification.Name] as? String
-                else { return }
-                
-                let beacon = Beacon(name: name, uuid: uuid, supportsIBeacon: false)
-                Database.sharedDatabase.logRange(rssi, forBeacon: beacon, time: currentTime)
-            }
-        }
     }
     
     override func viewWillAppear(animated: Bool) {

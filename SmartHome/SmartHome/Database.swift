@@ -38,9 +38,9 @@ class Database {
         }
     }
     
-    func logRange(range: Int, forBeacon beacon: Beacon, time: NSDate) {
+    func logRange(range: Int, forBeacon beacon: Beacon, time: NSTimeInterval) {
         let csv = [
-            "\(time.timeIntervalSince1970)",
+            "\(time)",
             beacon.uuid,
             "\(range)",
             beacon.name

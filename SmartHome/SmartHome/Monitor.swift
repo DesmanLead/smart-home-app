@@ -24,7 +24,14 @@ class Monitor {
         @objc func locationManager(manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], inRegion region: CLBeaconRegion) {
             var userInfo: [NSObject:AnyObject] = [:]
             
-            for beacon: CLBeacon in beacons {                
+            let currentTime = NSDate.timeIntervalSinceReferenceDate()
+            
+            for beacon: CLBeacon in beacons {
+                // Log to DB
+                let dbBeacon = Beacon(name: region.identifier, uuid: beacon.proximityUUID.UUIDString, supportsIBeacon: true)
+                Database.sharedDatabase.logRange(beacon.rssi, forBeacon: dbBeacon, time: currentTime)
+                
+                // Broadcast notification
                 let beaconInfo: [NSObject:AnyObject] = [
                     RangeNotification.Name : region.identifier,
                     RangeNotification.Proximity  : beacon.proximity.rawValue,
@@ -53,13 +60,13 @@ class Monitor {
     // MARK: - Bluetooth Devices handler
     
     private class BluetoothDevicesHandler: NSObject, CBCentralManagerDelegate {
-        private var devices: [String:Int]
+        private var devices: [String:Beacon]
         
         init(devices: [Beacon]) {
             self.devices = [:]
             
             for device in devices {
-                self.devices[device.name] = 0
+                self.devices[device.name] = device
             }
         }
         
@@ -74,8 +81,11 @@ class Monitor {
         
         @objc private func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
             print("\(peripheral.name) : \(RSSI)")
-            if let name = peripheral.name where devices[name] != nil {
+            if let name = peripheral.name,
+               let device = devices[name] {
                 print("Devie of interest \(peripheral.name) : \(RSSI)")
+                let currentTime = NSDate.timeIntervalSinceReferenceDate()
+                Database.sharedDatabase.logRange(RSSI.integerValue, forBeacon: device, time: currentTime)
             }
         }
     }
