@@ -71,7 +71,8 @@ class Database {
     
     func getBeacons() -> [Beacon] {
         return [
-            Beacon(name: "WorkBeacon", uuid: "EBEFD083-70A2-47C8-9837-E7B5634DF524")
+            Beacon(name: "WorkBeacon", uuid: "EBEFD083-70A2-47C8-9837-E7B5634DF524", supportsIBeacon: true),
+            Beacon(name: "Apple TV", uuid: "ATV00", supportsIBeacon: false)
         ]
     }
     

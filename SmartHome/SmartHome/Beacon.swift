@@ -11,4 +11,5 @@ import Foundation
 struct Beacon {
     let name: String
     let uuid: String
+    let supportsIBeacon: Bool
 }

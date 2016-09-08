@@ -47,7 +47,7 @@ class ViewController: UIViewController, UITableViewDataSource {
                       let name = parameters[Monitor.RangeNotification.Name] as? String
                 else { return }
                 
-                let beacon = Beacon(name: name, uuid: uuid)
+                let beacon = Beacon(name: name, uuid: uuid, supportsIBeacon: false)
                 Database.sharedDatabase.logRange(rssi, forBeacon: beacon, time: currentTime)
             }
         }

@@ -26,7 +26,6 @@ class Monitor {
             
             for beacon: CLBeacon in beacons {                
                 let beaconInfo: [NSObject:AnyObject] = [
-//                    RangeNotification.Identifier : beacon.proximityUUID.UUIDString,
                     RangeNotification.Name : region.identifier,
                     RangeNotification.Proximity  : beacon.proximity.rawValue,
                     RangeNotification.RSSI  : beacon.rssi
@@ -54,6 +53,16 @@ class Monitor {
     // MARK: - Bluetooth Devices handler
     
     private class BluetoothDevicesHandler: NSObject, CBCentralManagerDelegate {
+        private var devices: [String:Int]
+        
+        init(devices: [Beacon]) {
+            self.devices = [:]
+            
+            for device in devices {
+                self.devices[device.name] = 0
+            }
+        }
+        
         @objc private func centralManagerDidUpdateState(central: CBCentralManager) {
             if central.state == .PoweredOn {
                 central.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
@@ -65,6 +74,9 @@ class Monitor {
         
         @objc private func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
             print("\(peripheral.name) : \(RSSI)")
+            if let name = peripheral.name where devices[name] != nil {
+                print("Devie of interest \(peripheral.name) : \(RSSI)")
+            }
         }
     }
     
@@ -83,6 +95,10 @@ class Monitor {
         lm.delegate = handler
         
         for beacon in beacons {
+            if !beacon.supportsIBeacon {
+                continue
+            }
+            
             let beaconUUID = NSUUID(UUIDString: beacon.uuid)
             let beaconIdentifier = beacon.name
             let beaconRegion = CLBeaconRegion(proximityUUID: beaconUUID!, identifier:beaconIdentifier)
@@ -95,7 +111,7 @@ class Monitor {
         self.handler = handler
         
         
-        bluetoothDevicesHandler = BluetoothDevicesHandler()
+        bluetoothDevicesHandler = BluetoothDevicesHandler(devices: beacons.filter { !$0.supportsIBeacon })
         bluetoothCentralManager = CBCentralManager(delegate: bluetoothDevicesHandler, queue: nil)
     }
     
@@ -103,6 +119,10 @@ class Monitor {
         let lm = locationManager()
         
         for beacon in beacons {
+            if !beacon.supportsIBeacon {
+                continue
+            }
+            
             let beaconUUID = NSUUID(UUIDString: beacon.uuid)
             let beaconIdentifier = beacon.name
             let beaconRegion = CLBeaconRegion(proximityUUID: beaconUUID!, identifier:beaconIdentifier)
