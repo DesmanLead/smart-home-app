@@ -13,14 +13,11 @@ class Database {
     
     private static let Delimiter = ","
     
-    private static let filePath = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last!.URLByAppendingPathComponent("output.csv")
-    private var fileHandle: NSFileHandle
+    private static let filePathBase = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last!
+    private var fileHandle: NSFileHandle!
     
     init() {
-        if !NSFileManager.defaultManager().fileExistsAtPath(Database.filePath.path!) {
-            NSFileManager.defaultManager().createFileAtPath(Database.filePath.path!, contents: nil, attributes: nil)
-        }
-        fileHandle = try! NSFileHandle(forWritingToURL: Database.filePath)
+        self.createFile()
     }
     
     deinit {
@@ -28,6 +25,14 @@ class Database {
     }
     
     private let isolationQueue = dispatch_queue_create("CSV writing queue", DISPATCH_QUEUE_SERIAL)
+    
+    private func createFile() {
+        let filePath = Database.filePathBase.URLByAppendingPathComponent("\(NSDate().description).csv")
+        if !NSFileManager.defaultManager().fileExistsAtPath(filePath.path!) {
+            NSFileManager.defaultManager().createFileAtPath(filePath.path!, contents: nil, attributes: nil)
+        }
+        fileHandle = try! NSFileHandle(forWritingToURL: filePath)
+    }
     
     private func writeLine(line: String) {
         let processedLine = line + "\n"
@@ -61,28 +66,27 @@ class Database {
     }
     
     func dump() {
-        print("dump")
-        
         dispatch_async(isolationQueue) {
             self.fileHandle.closeFile()
-            self.fileHandle = try! NSFileHandle(forWritingToURL: Database.filePath)
+            self.createFile()
         }
     }
     
     func getBeacons() -> [Beacon] {
         return [
             Beacon(name: "WorkBeacon", uuid: "EBEFD083-70A2-47C8-9837-E7B5634DF524", supportsIBeacon: true),
-            Beacon(name: "Apple TV", uuid: "ATV00", supportsIBeacon: false)
+            Beacon(name: "Apple TV", uuid: "3ec3d2ca-4624-4943-a2f6-69e222c57393", supportsIBeacon: false),
+            Beacon(name: "MI_SCALE", uuid: "bc3c94b6-9c70-4e2c-9205-0b5d3476c7d6", supportsIBeacon: false)
         ]
     }
     
     func getDevices() -> [Device] {
         return [
-            Device(name: "Kitchen Light", isEnabled: false),
-            Device(name: "Bedroom Light", isEnabled: false),
-            Device(name: "Bathroom Light", isEnabled: false),
-            Device(name: "Toilet Light", isEnabled: false),
-            Device(name: "Hall Light", isEnabled: false)
+            Device(identifier: "c2bc678c-ed73-45c6-8804-bcaf645f0891", name: "Kitchen Light", isEnabled: false),
+            Device(identifier: "ed646245-3030-4251-8320-14e228fed987", name: "Bedroom Light", isEnabled: false),
+            Device(identifier: "66ca0cbc-6d48-4264-be78-8914412f27ed", name: "Bathroom Light", isEnabled: false),
+            Device(identifier: "42c46854-3ddd-4896-b271-c051e4edacb8", name: "Toilet Light", isEnabled: false),
+            Device(identifier: "12421fda-3bfd-4eda-8534-ca7f5ba8bf8f", name: "Hall Light", isEnabled: false)
         ]
     }
 }

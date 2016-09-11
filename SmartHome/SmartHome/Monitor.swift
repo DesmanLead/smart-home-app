@@ -80,10 +80,8 @@ class Monitor {
         }
         
         @objc private func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
-            print("\(peripheral.name) : \(RSSI)")
             if let name = peripheral.name,
                let device = devices[name] {
-                print("Devie of interest \(peripheral.name) : \(RSSI)")
                 let currentTime = NSDate.timeIntervalSinceReferenceDate()
                 Database.sharedDatabase.logRange(RSSI.integerValue, forBeacon: device, time: currentTime)
             }

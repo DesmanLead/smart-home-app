@@ -27,6 +27,8 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     @IBAction func onDump() {
         Database.sharedDatabase.dump()
+        
+        label.text = "dumped"
     }
     
     override func viewDidLoad() {

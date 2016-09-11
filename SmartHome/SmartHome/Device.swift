@@ -10,7 +10,7 @@ import Foundation
 
 
 struct Device {
-    var identifier: String { return name }
+    var identifier: String
     let name: String
     var isEnabled: Bool
 }
