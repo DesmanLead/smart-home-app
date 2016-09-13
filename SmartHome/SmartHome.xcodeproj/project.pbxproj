@@ -16,6 +16,7 @@
 		7C60D5F61A014886009D8055 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C60D5F51A014886009D8055 /* Images.xcassets */; };
 		7C60D5F91A014886009D8055 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C60D5F71A014886009D8055 /* LaunchScreen.xib */; };
 		7C60D6051A014886009D8055 /* SmartHomeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60D6041A014886009D8055 /* SmartHomeTests.swift */; };
+		7C939E701D882DB60059B471 /* HeartRateMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C939E6F1D882DB60059B471 /* HeartRateMonitor.swift */; };
 		7CB2CC4C1A0261E60025AB04 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2CC4B1A0261E60025AB04 /* Database.swift */; };
 		7CB2CC501A0262650025AB04 /* Beacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2CC4F1A0262650025AB04 /* Beacon.swift */; };
 		7CB2CC521A02647D0025AB04 /* Monitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2CC511A02647D0025AB04 /* Monitor.swift */; };
@@ -54,6 +55,7 @@
 		7C60D6031A014886009D8055 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C60D6041A014886009D8055 /* SmartHomeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartHomeTests.swift; sourceTree = "<group>"; };
 		7C60D6111A014AF3009D8055 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		7C939E6F1D882DB60059B471 /* HeartRateMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartRateMonitor.swift; sourceTree = "<group>"; };
 		7CB2CC4B1A0261E60025AB04 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		7CB2CC4F1A0262650025AB04 /* Beacon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Beacon.swift; sourceTree = "<group>"; };
 		7CB2CC511A02647D0025AB04 /* Monitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monitor.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				7C60D5F01A014886009D8055 /* ViewController.swift */,
 				7CB2CC4B1A0261E60025AB04 /* Database.swift */,
 				7CB2CC511A02647D0025AB04 /* Monitor.swift */,
+				7C939E6F1D882DB60059B471 /* HeartRateMonitor.swift */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C0A8BBA1D21617000FE1255 /* DeviceTableCell.swift in Sources */,
+				7C939E701D882DB60059B471 /* HeartRateMonitor.swift in Sources */,
 				7CB2CC4C1A0261E60025AB04 /* Database.swift in Sources */,
 				7CB2CC521A02647D0025AB04 /* Monitor.swift in Sources */,
 				7C60D5F11A014886009D8055 /* ViewController.swift in Sources */,

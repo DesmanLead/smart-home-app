@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import HealthKit
 
 class Database {
     static let sharedDatabase = Database()
@@ -71,7 +70,7 @@ class Database {
     func logHeartRate(rate: Double, time: NSTimeInterval) {
         let csv = [
             "\(time)",
-            "uuid",
+            "d9114d7c-6168-4471-805e-95c5ed325dc5",
             "\(rate)",
             "Heart Rate Sensor"
         ].joinWithSeparator(Database.Delimiter)
@@ -81,59 +80,9 @@ class Database {
     
     func dump() {
         dispatch_async(isolationQueue) {
-            self.dumpHeartRate()
             self.fileHandle.closeFile()
             self.createFile()
         }
-    }
-    
-//    private static let healthKitStore = HKHealthStore()
-    
-    private func dumpHeartRate() {
-//        let heartRateType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeartRate)!
-//        let heartRateUnit = HKUnit(fromString: "count/min")
-//        let healthKitTypes: Set = [ heartRateType ]
-//        
-//        let startTime = observationStartDate
-//        
-//        Database.healthKitStore.requestAuthorizationToShareTypes(Set(), readTypes: healthKitTypes) { _, _ in
-//            let queryPredicate  = HKQuery.predicateForSamplesWithStartDate(startTime, endDate: NSDate(), options: .None)
-        
-//            let query: HKAnchoredObjectQuery = HKAnchoredObjectQuery(type: heartRateType,
-//                                                                     predicate: queryPredicate,
-//                                                                     anchor: nil,
-//                                                                     limit: HKObjectQueryNoLimit) {
-//                query, samples, deletedObjects, anchor, error in
-//                                                                        
-//                if let errorFound = error {
-//                    print("query error: \(errorFound.localizedDescription)")
-//                    return
-//                }
-//                                                                        
-//                guard let samples = samples else {
-//                    return
-//                }
-//
-//                for sample in samples {
-//                    if let quantitySample = sample as? HKQuantitySample {
-//                        print("\(quantitySample.startDate) — \(quantitySample.endDate) : \(quantitySample.quantity.doubleValueForUnit(heartRateUnit))")
-//                    }
-//                }
-//            }
-            
-//            let query = HKSampleQuery(sampleType:heartRateType, predicate:queryPredicate, limit:HKObjectQueryNoLimit, sortDescriptors:nil) {
-//                query, results, error in
-//                
-//                guard let results = results else { return }
-//                
-//                for quantitySample in results {
-//                    let quantity = (quantitySample as! HKQuantitySample).quantity
-//                    print("\(quantitySample.startDate) — \(quantitySample.endDate) : \(quantity.doubleValueForUnit(heartRateUnit))")
-//                }
-//            }
-//            
-//            Database.healthKitStore.executeQuery(query)
-//        }
     }
     
     func getBeacons() -> [Beacon] {

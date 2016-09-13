@@ -17,10 +17,12 @@ class ViewController: UIViewController, UITableViewDataSource {
         label.text = "started"
         
         Monitor.start(Database.sharedDatabase.getBeacons())
+        HeartRateMonitor.sharedMonitor.start()
     }
     
     @IBAction func onStop() {
         Monitor.stop(Database.sharedDatabase.getBeacons())
+        HeartRateMonitor.sharedMonitor.stop()
         
         label.text = "stopped"
     }
