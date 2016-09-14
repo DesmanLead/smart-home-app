@@ -16,12 +16,12 @@ class HeartRateMonitor {
     private var query: HKQuery?
     
     func start() {
-        let heartRateType = HKObjectType.quantityTypeForIdentifier(HKQuantityTypeIdentifierHeartRate)!
-        let heartRateUnit = HKUnit(fromString: "count/min")
+        let heartRateType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!
+        let heartRateUnit = HKUnit(from: "count/min")
         let healthKitTypes: Set = [ heartRateType ]
 
-        healthKitStore.requestAuthorizationToShareTypes(nil, readTypes: healthKitTypes) { _, _ in
-            let queryPredicate  = HKQuery.predicateForSamplesWithStartDate(NSDate().dateByAddingTimeInterval(-600), endDate: nil, options: .None)
+        healthKitStore.requestAuthorization(toShare: nil, read: healthKitTypes) { _, _ in
+            let queryPredicate  = HKQuery.predicateForSamples(withStart: Date().addingTimeInterval(-600), end: nil, options: [])
 
             let query: HKAnchoredObjectQuery = HKAnchoredObjectQuery(type: heartRateType,
                                                                      predicate: queryPredicate,
@@ -40,11 +40,11 @@ class HeartRateMonitor {
 
                 for sample in samples {
                     if let quantitySample = sample as? HKQuantitySample {
-                        let heartRate = quantitySample.quantity.doubleValueForUnit(heartRateUnit)
+                        let heartRate = quantitySample.quantity.doubleValue(for: heartRateUnit)
                         let time = quantitySample.endDate
                         
                         print("\(quantitySample.startDate) — \(time) : \(heartRate)")
-                        Database.sharedDatabase.logHeartRate(heartRate, time: time.timeIntervalSinceReferenceDate)
+                        Database.sharedDatabase.logHeartRate(rate: heartRate, time: time.timeIntervalSinceReferenceDate)
                     }
                 }
             }
@@ -63,23 +63,23 @@ class HeartRateMonitor {
                 
                 for sample in samples {
                     if let quantitySample = sample as? HKQuantitySample {
-                        let heartRate = quantitySample.quantity.doubleValueForUnit(heartRateUnit)
+                        let heartRate = quantitySample.quantity.doubleValue(for: heartRateUnit)
                         let time = quantitySample.endDate
                         
                         print("\(quantitySample.startDate) — \(time) : \(heartRate)")
-                        Database.sharedDatabase.logHeartRate(heartRate, time: time.timeIntervalSinceReferenceDate)
+                        Database.sharedDatabase.logHeartRate(rate: heartRate, time: time.timeIntervalSinceReferenceDate)
                     }
                 }
             }
                       
-            self.healthKitStore.executeQuery(query)
+            self.healthKitStore.execute(query)
             self.query = query
         }
     }
     
     func stop() {
         if let query = self.query {
-            healthKitStore.stopQuery(query)
+            healthKitStore.stop(query)
         }
     }
 }

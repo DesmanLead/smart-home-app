@@ -39,29 +39,29 @@ class ViewController: UIViewController, UITableViewDataSource {
         devicesTable.dataSource = self
     }
     
-    func onRangeData(notification: NSNotification) {
-        label.text = notification.userInfo?.description
+    func onRangeData(_ notification: Notification) {
+        label.text = (notification as NSNotification).userInfo?.description
     }
     
-    override func viewWillAppear(animated: Bool) {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.onRangeData(_:)), name: Monitor.RangeNotification.Name, object: nil)
+    override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.onRangeData(_:)), name: NSNotification.Name(rawValue: Monitor.RangeNotification.Name), object: nil)
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
     }
     
     
     // MARK: - UITableViewDataSource
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return devices.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCellWithIdentifier("deviceCell") as? DeviceTableCell else { fatalError() }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "deviceCell") as? DeviceTableCell else { fatalError() }
         
-        let device = devices[indexPath.row]
+        let device = devices[(indexPath as NSIndexPath).row]
         
         cell.deviceName = device.name
         cell.deviceEnabled = device.isEnabled
@@ -71,7 +71,7 @@ class ViewController: UIViewController, UITableViewDataSource {
             
             var updatedDevice = device
             updatedDevice.isEnabled = isEnabled
-            Database.sharedDatabase.logDeviceState(updatedDevice, time: NSDate())
+            Database.sharedDatabase.logDeviceState(updatedDevice, time: Date.timeIntervalSinceReferenceDate)
         }
         
         return cell

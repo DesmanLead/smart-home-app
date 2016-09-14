@@ -23,10 +23,10 @@ class DeviceTableCell: UITableViewCell {
     
     var deviceEnabled: Bool {
         get {
-            return isEnabledSwitch.on
+            return isEnabledSwitch.isOn
         }
         set {
-            isEnabledSwitch.on = newValue
+            isEnabledSwitch.isOn = newValue
         }
     }
     
@@ -36,7 +36,7 @@ class DeviceTableCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var isEnabledSwitch: UISwitch!
     
-    @IBAction func onSwitch(sender: UISwitch, forEvent event: UIEvent) {
-        onDeviceEnabled?(sender.on)
+    @IBAction func onSwitch(_ sender: UISwitch, forEvent event: UIEvent) {
+        onDeviceEnabled?(sender.isOn)
     }
 }

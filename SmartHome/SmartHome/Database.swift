@@ -11,10 +11,10 @@ import Foundation
 class Database {
     static let sharedDatabase = Database()
     
-    private static let Delimiter = ","
+    fileprivate static let Delimiter = ","
     
-    private static let filePathBase = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last!
-    private var fileHandle: NSFileHandle!
+    fileprivate static let filePathBase = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
+    fileprivate var fileHandle: FileHandle!
     private var observationStartDate: NSDate!
     
     init() {
@@ -25,61 +25,61 @@ class Database {
         fileHandle.closeFile()
     }
     
-    private let isolationQueue = dispatch_queue_create("CSV writing queue", DISPATCH_QUEUE_SERIAL)
+    fileprivate let isolationQueue = DispatchQueue(label: "CSV writing queue", attributes: [])
     
-    private func createFile() {
+    fileprivate func createFile() {
         observationStartDate = NSDate()
-        let filePath = Database.filePathBase.URLByAppendingPathComponent("\(observationStartDate.description).csv")
-        if !NSFileManager.defaultManager().fileExistsAtPath(filePath.path!) {
-            NSFileManager.defaultManager().createFileAtPath(filePath.path!, contents: nil, attributes: nil)
+        let filePath = Database.filePathBase.appendingPathComponent("\(observationStartDate.description).csv")
+        if !FileManager.default.fileExists(atPath: filePath.path) {
+            FileManager.default.createFile(atPath: filePath.path, contents: nil, attributes: nil)
         }
-        fileHandle = try! NSFileHandle(forWritingToURL: filePath)
+        fileHandle = try! FileHandle(forWritingTo: filePath)
     }
     
-    private func writeLine(line: String) {
+    fileprivate func writeLine(_ line: String) {
         let processedLine = line + "\n"
         
-        dispatch_async(isolationQueue) {
+        isolationQueue.async {
             self.fileHandle.seekToEndOfFile()
-            self.fileHandle.writeData(processedLine.dataUsingEncoding(NSUTF8StringEncoding)!)
+            self.fileHandle.write(processedLine.data(using: String.Encoding.utf8)!)
         }
     }
     
-    func logRange(range: Int, forBeacon beacon: Beacon, time: NSTimeInterval) {
+    func logRange(_ range: Int, forBeacon beacon: Beacon, time: TimeInterval) {
         let csv = [
             "\(time)",
             beacon.uuid,
             "\(range)",
             beacon.name
-        ].joinWithSeparator(Database.Delimiter)
+        ].joined(separator: Database.Delimiter)
         
         writeLine(csv)
     }
     
-    func logDeviceState(device: Device, time: NSDate) {
+    func logDeviceState(_ device: Device, time: TimeInterval) {
         let csv = [
-            "\(time.timeIntervalSince1970)",
+            "\(time)",
             device.identifier,
             "\(device.isEnabled ? 1 : 0)",
             device.name
-        ].joinWithSeparator(Database.Delimiter)
+        ].joined(separator: Database.Delimiter)
         
         writeLine(csv)
     }
     
-    func logHeartRate(rate: Double, time: NSTimeInterval) {
+    func logHeartRate(rate: Double, time: TimeInterval) {
         let csv = [
             "\(time)",
             "d9114d7c-6168-4471-805e-95c5ed325dc5",
             "\(rate)",
             "Heart Rate Sensor"
-        ].joinWithSeparator(Database.Delimiter)
+        ].joined(separator: Database.Delimiter)
         
         writeLine(csv)
     }
     
     func dump() {
-        dispatch_async(isolationQueue) {
+        isolationQueue.async {
             self.fileHandle.closeFile()
             self.createFile()
         }
@@ -87,7 +87,11 @@ class Database {
     
     func getBeacons() -> [Beacon] {
         return [
-            Beacon(name: "WorkBeacon", uuid: "EBEFD083-70A2-47C8-9837-E7B5634DF524", supportsIBeacon: true),
+            Beacon(name: "KitchenBeacon0", uuid: "EBEFD083-70A2-47C8-9837-E7B5634DF524", supportsIBeacon: true),
+            Beacon(name: "HallBeacon1", uuid: "EBEFD083-70A2-47C8-9837-E7B5634DF525", supportsIBeacon: true),
+            Beacon(name: "ToiletBeacon2", uuid: "EBEFD083-70A2-47C8-9837-E7B5634DF526", supportsIBeacon: true),
+            Beacon(name: "Beacon3", uuid: "EBEFD083-70A2-47C8-9837-E7B5634DF527", supportsIBeacon: true),
+            Beacon(name: "KitchenBeacon4", uuid: "EBEFD083-70A2-47C8-9837-E7B5634DF528", supportsIBeacon: true),
             Beacon(name: "Apple TV", uuid: "3ec3d2ca-4624-4943-a2f6-69e222c57393", supportsIBeacon: false),
             Beacon(name: "MI_SCALE", uuid: "bc3c94b6-9c70-4e2c-9205-0b5d3476c7d6", supportsIBeacon: false)
         ]

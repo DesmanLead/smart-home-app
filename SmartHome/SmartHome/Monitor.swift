@@ -20,34 +20,34 @@ class Monitor {
     
     // MARK: - iBeacons handler
     
-    private class LocationHandler: NSObject, CLLocationManagerDelegate {
-        @objc func locationManager(manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], inRegion region: CLBeaconRegion) {
-            var userInfo: [NSObject:AnyObject] = [:]
+    fileprivate class LocationHandler: NSObject, CLLocationManagerDelegate {
+        @objc func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
+            var userInfo: [AnyHashable: Any] = [:]
             
-            let currentTime = NSDate.timeIntervalSinceReferenceDate()
+            let currentTime = Date.timeIntervalSinceReferenceDate
             
             for beacon: CLBeacon in beacons {
                 // Log to DB
-                let dbBeacon = Beacon(name: region.identifier, uuid: beacon.proximityUUID.UUIDString, supportsIBeacon: true)
+                let dbBeacon = Beacon(name: region.identifier, uuid: beacon.proximityUUID.uuidString, supportsIBeacon: true)
                 Database.sharedDatabase.logRange(beacon.rssi, forBeacon: dbBeacon, time: currentTime)
                 
                 // Broadcast notification
-                let beaconInfo: [NSObject:AnyObject] = [
+                let beaconInfo: [AnyHashable: Any] = [
                     RangeNotification.Name : region.identifier,
                     RangeNotification.Proximity  : beacon.proximity.rawValue,
                     RangeNotification.RSSI  : beacon.rssi
                 ]
                 
-                userInfo[beacon.proximityUUID.UUIDString] = beaconInfo
+                userInfo[beacon.proximityUUID.uuidString] = beaconInfo
             }
             
-            let notification = NSNotification(name: RangeNotification.Name, object: self, userInfo: userInfo)
-            let nc = NSNotificationCenter.defaultCenter()
-            nc.postNotification(notification)
+            let notification = Notification(name: Notification.Name(rawValue: RangeNotification.Name), object: self, userInfo: userInfo)
+            let nc = NotificationCenter.default
+            nc.post(notification)
         }
     }
     
-    private class func locationManager() -> CLLocationManager {
+    fileprivate class func locationManager() -> CLLocationManager {
         struct Holder {
             static let instance: CLLocationManager = CLLocationManager()
         }
@@ -55,12 +55,12 @@ class Monitor {
         return Holder.instance
     }
     
-    private static var handler: LocationHandler?
+    fileprivate static var handler: LocationHandler?
     
     // MARK: - Bluetooth Devices handler
     
-    private class BluetoothDevicesHandler: NSObject, CBCentralManagerDelegate {
-        private var devices: [String:Beacon]
+    fileprivate class BluetoothDevicesHandler: NSObject, CBCentralManagerDelegate {
+        fileprivate var devices: [String:Beacon]
         
         init(devices: [Beacon]) {
             self.devices = [:]
@@ -70,30 +70,30 @@ class Monitor {
             }
         }
         
-        @objc private func centralManagerDidUpdateState(central: CBCentralManager) {
-            if central.state == .PoweredOn {
-                central.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
+        @objc fileprivate func centralManagerDidUpdateState(_ central: CBCentralManager) {
+            if central.state == .poweredOn {
+                central.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
             }
             else {
                 print(central.state)
             }
         }
         
-        @objc private func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
+        @objc fileprivate func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
             if let name = peripheral.name,
                let device = devices[name] {
-                let currentTime = NSDate.timeIntervalSinceReferenceDate()
-                Database.sharedDatabase.logRange(RSSI.integerValue, forBeacon: device, time: currentTime)
+                let currentTime = Date.timeIntervalSinceReferenceDate
+                Database.sharedDatabase.logRange(RSSI.intValue, forBeacon: device, time: currentTime)
             }
         }
     }
     
-    private static var bluetoothCentralManager: CBCentralManager?
-    private static var bluetoothDevicesHandler: BluetoothDevicesHandler?
+    fileprivate static var bluetoothCentralManager: CBCentralManager?
+    fileprivate static var bluetoothDevicesHandler: BluetoothDevicesHandler?
     
     // MARK: - Monotoring control
     
-    class func start(beacons: [Beacon]) {
+    class func start(_ beacons: [Beacon]) {
         stop(beacons)
         
         let lm = locationManager()
@@ -107,13 +107,13 @@ class Monitor {
                 continue
             }
             
-            let beaconUUID = NSUUID(UUIDString: beacon.uuid)
+            let beaconUUID = UUID(uuidString: beacon.uuid)
             let beaconIdentifier = beacon.name
             let beaconRegion = CLBeaconRegion(proximityUUID: beaconUUID!, identifier:beaconIdentifier)
             beaconRegion.notifyEntryStateOnDisplay = true
             
-            lm.startMonitoringForRegion(beaconRegion)
-            lm.startRangingBeaconsInRegion(beaconRegion)
+            lm.startMonitoring(for: beaconRegion)
+            lm.startRangingBeacons(in: beaconRegion)
         }
         
         self.handler = handler
@@ -123,7 +123,7 @@ class Monitor {
         bluetoothCentralManager = CBCentralManager(delegate: bluetoothDevicesHandler, queue: nil)
     }
     
-    class func stop(beacons: [Beacon]) {
+    class func stop(_ beacons: [Beacon]) {
         let lm = locationManager()
         
         for beacon in beacons {
@@ -131,13 +131,13 @@ class Monitor {
                 continue
             }
             
-            let beaconUUID = NSUUID(UUIDString: beacon.uuid)
+            let beaconUUID = UUID(uuidString: beacon.uuid)
             let beaconIdentifier = beacon.name
             let beaconRegion = CLBeaconRegion(proximityUUID: beaconUUID!, identifier:beaconIdentifier)
             beaconRegion.notifyEntryStateOnDisplay = true
 
-            lm.stopRangingBeaconsInRegion(beaconRegion)
-            lm.stopMonitoringForRegion(beaconRegion)
+            lm.stopRangingBeacons(in: beaconRegion)
+            lm.stopMonitoring(for: beaconRegion)
         }
         
         self.handler = nil
