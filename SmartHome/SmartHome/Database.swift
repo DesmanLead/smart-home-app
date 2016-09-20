@@ -103,11 +103,11 @@ class Database {
             Device(identifier: "1b0ada96-f4e0-4edc-8441-d0ed12d9ba53", name: "Kitchen Local Light", isEnabled: false),
             Device(identifier: "0b6889f4-b87c-46c5-98c9-b8c3263cd8eb", name: "Kitchen Kettle", isEnabled: false),
             Device(identifier: "ed646245-3030-4251-8320-14e228fed987", name: "Bedroom Light", isEnabled: false),
+            Device(identifier: "9660cb58-ab9f-448b-add8-ed5d76e3de66", name: "Bedroom Local Light", isEnabled: false),
+            Device(identifier: "0489ee1d-8919-42ce-a130-14aa0562f48b", name: "Bedroom TV", isEnabled: false),
             Device(identifier: "66ca0cbc-6d48-4264-be78-8914412f27ed", name: "Bathroom Light", isEnabled: false),
             Device(identifier: "42c46854-3ddd-4896-b271-c051e4edacb8", name: "Toilet Light", isEnabled: false),
             Device(identifier: "12421fda-3bfd-4eda-8534-ca7f5ba8bf8f", name: "Hall Light", isEnabled: false),
-            Device(identifier: "9660cb58-ab9f-448b-add8-ed5d76e3de66", name: "Hall Local Light", isEnabled: false),
-            Device(identifier: "0489ee1d-8919-42ce-a130-14aa0562f48b", name: "Hall TV", isEnabled: false),
             Device(identifier: "dcdb6cef-f9b3-461e-81b2-54ad37736ef4", name: "Kitchen Water", isEnabled: false),
             Device(identifier: "1d145529-a34b-4b9c-94dc-df1021589cd9", name: "Bathroom Water", isEnabled: false),
             Device(identifier: "a9a2eefe-f409-45b2-92ee-d5e5cd3d29c2", name: "Bathroom Shower", isEnabled: false)
