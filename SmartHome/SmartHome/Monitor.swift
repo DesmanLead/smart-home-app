@@ -140,11 +140,6 @@ class Monitor {
             lm.stopMonitoring(for: beaconRegion)
         }
         
-        self.handler = nil
-        
-        
         bluetoothCentralManager?.stopScan()
-        bluetoothDevicesHandler = nil
-        bluetoothCentralManager = nil
     }
 }
