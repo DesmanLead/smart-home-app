@@ -8,35 +8,41 @@
 
 import Foundation
 
-class Database {
+class Database
+{
     static let sharedDatabase = Database()
     
-    fileprivate static let Delimiter = ","
+    private static let Delimiter = ","
     
-    fileprivate static let filePathBase = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
-    fileprivate var fileHandle: FileHandle!
+    private static let filePathBase = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
+    private var fileHandle: FileHandle!
     private var observationStartDate: NSDate!
     
-    init() {
+    init()
+    {
         self.createFile()
     }
     
-    deinit {
+    deinit
+    {
         fileHandle.closeFile()
     }
     
-    fileprivate let isolationQueue = DispatchQueue(label: "CSV writing queue", attributes: [])
+    private let isolationQueue = DispatchQueue(label: "CSV writing queue", attributes: [])
     
-    fileprivate func createFile() {
+    private func createFile()
+    {
         observationStartDate = NSDate()
         let filePath = Database.filePathBase.appendingPathComponent("\(observationStartDate.description).csv")
-        if !FileManager.default.fileExists(atPath: filePath.path) {
+        if !FileManager.default.fileExists(atPath: filePath.path)
+        {
             FileManager.default.createFile(atPath: filePath.path, contents: nil, attributes: nil)
         }
         fileHandle = try! FileHandle(forWritingTo: filePath)
     }
     
-    fileprivate func writeLine(_ line: String) {
+    private func writeLine(_ line: String)
+    {
         let processedLine = line + "\n"
         
         isolationQueue.async {
@@ -45,7 +51,8 @@ class Database {
         }
     }
     
-    func logRange(_ range: Int, forBeacon beacon: Beacon, time: TimeInterval) {
+    func logRange(_ range: Int, forBeacon beacon: Beacon, time: TimeInterval)
+    {
         let csv = [
             "\(time)",
             beacon.uuid,
@@ -56,7 +63,8 @@ class Database {
         writeLine(csv)
     }
     
-    func logDeviceState(_ device: Device, time: TimeInterval) {
+    func logDeviceState(_ device: Device, time: TimeInterval)
+    {
         let csv = [
             "\(time)",
             device.identifier,
@@ -67,7 +75,8 @@ class Database {
         writeLine(csv)
     }
     
-    func logHeartRate(rate: Double, time: TimeInterval) {
+    func logHeartRate(rate: Double, time: TimeInterval)
+    {
         let csv = [
             "\(time)",
             "d9114d7c-6168-4471-805e-95c5ed325dc5",
@@ -78,14 +87,16 @@ class Database {
         writeLine(csv)
     }
     
-    func dump() {
+    func dump()
+    {
         isolationQueue.async {
             self.fileHandle.closeFile()
             self.createFile()
         }
     }
     
-    func getBeacons() -> [Beacon] {
+    func getBeacons() -> [Beacon]
+    {
         return [
             Beacon(name: "KitchenBeacon0", uuid: "EBEFD083-70A2-47C8-9837-E7B5634DF524", supportsIBeacon: true),
             Beacon(name: "HallBeacon1", uuid: "EBEFD083-70A2-47C8-9837-E7B5634DF525", supportsIBeacon: true),
@@ -97,7 +108,8 @@ class Database {
         ]
     }
     
-    func getDevices() -> [Device] {
+    func getDevices() -> [Device]
+    {
         return [
             Device(identifier: "c2bc678c-ed73-45c6-8804-bcaf645f0891", name: "Kitchen Light", isEnabled: false),
             Device(identifier: "1b0ada96-f4e0-4edc-8441-d0ed12d9ba53", name: "Kitchen Local Light", isEnabled: false),

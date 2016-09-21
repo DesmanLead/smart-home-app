@@ -9,18 +9,22 @@
 import Foundation
 import HealthKit
 
-class HeartRateMonitor {
+class HeartRateMonitor
+{
     static let sharedMonitor = HeartRateMonitor()
     
     private let healthKitStore = HKHealthStore()
     private var query: HKQuery?
     
-    func start() {
+    func start()
+    {
         let heartRateType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!
         let heartRateUnit = HKUnit(from: "count/min")
         let healthKitTypes: Set = [ heartRateType ]
 
-        healthKitStore.requestAuthorization(toShare: nil, read: healthKitTypes) { _, _ in
+        healthKitStore.requestAuthorization(toShare: nil, read: healthKitTypes) {
+            _, _ in
+            
             let queryPredicate  = HKQuery.predicateForSamples(withStart: Date().addingTimeInterval(-600), end: nil, options: [])
 
             let query: HKAnchoredObjectQuery = HKAnchoredObjectQuery(type: heartRateType,
@@ -29,17 +33,21 @@ class HeartRateMonitor {
                                                                      limit: HKObjectQueryNoLimit) {
                 query, samples, deletedObjects, anchor, error in
 
-                if let errorFound = error {
+                if let errorFound = error
+                {
                     print("query error: \(errorFound.localizedDescription)")
                     return
                 }
 
-                guard let samples = samples else {
+                guard let samples = samples else
+                {
                     return
                 }
 
-                for sample in samples {
-                    if let quantitySample = sample as? HKQuantitySample {
+                for sample in samples
+                {
+                    if let quantitySample = sample as? HKQuantitySample
+                    {
                         let heartRate = quantitySample.quantity.doubleValue(for: heartRateUnit)
                         let time = quantitySample.endDate
                         
@@ -52,17 +60,21 @@ class HeartRateMonitor {
             query.updateHandler = {
                 query, samples, deletedObjects, anchor, error in
                 
-                if let errorFound = error {
+                if let errorFound = error
+                {
                     print("query error: \(errorFound.localizedDescription)")
                     return
                 }
                 
-                guard let samples = samples else {
+                guard let samples = samples else
+                {
                     return
                 }
                 
-                for sample in samples {
-                    if let quantitySample = sample as? HKQuantitySample {
+                for sample in samples
+                {
+                    if let quantitySample = sample as? HKQuantitySample
+                    {
                         let heartRate = quantitySample.quantity.doubleValue(for: heartRateUnit)
                         let time = quantitySample.endDate
                         
@@ -77,8 +89,10 @@ class HeartRateMonitor {
         }
     }
     
-    func stop() {
-        if let query = self.query {
+    func stop()
+    {
+        if let query = self.query
+        {
             healthKitStore.stop(query)
         }
     }

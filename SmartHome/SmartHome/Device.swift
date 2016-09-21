@@ -8,8 +8,8 @@
 
 import Foundation
 
-
-struct Device {
+struct Device
+{
     var identifier: String
     let name: String
     var isEnabled: Bool

@@ -9,23 +9,28 @@
 import Foundation
 import UIKit
 
-
-class DeviceTableCell: UITableViewCell {
-    
-    var deviceName: String? {
-        get {
+class DeviceTableCell: UITableViewCell
+{
+    var deviceName: String?
+    {
+        get
+        {
             return nameLabel?.text
         }
-        set {
+        set
+        {
             nameLabel?.text = newValue
         }
     }
     
-    var deviceEnabled: Bool {
-        get {
+    var deviceEnabled: Bool
+        {
+        get
+        {
             return isEnabledSwitch.isOn
         }
-        set {
+        set
+        {
             isEnabledSwitch.isOn = newValue
         }
     }
@@ -36,7 +41,8 @@ class DeviceTableCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var isEnabledSwitch: UISwitch!
     
-    @IBAction func onSwitch(_ sender: UISwitch, forEvent event: UIEvent) {
+    @IBAction func onSwitch(_ sender: UISwitch, forEvent event: UIEvent)
+    {
         onDeviceEnabled?(sender.isOn)
     }
 }

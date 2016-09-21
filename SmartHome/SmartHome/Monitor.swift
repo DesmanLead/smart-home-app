@@ -10,8 +10,10 @@ import Foundation
 import CoreLocation
 import CoreBluetooth
 
-class Monitor {
-    struct RangeNotification {
+class Monitor
+{
+    struct RangeNotification
+    {
         static let Name       = "SHRangeNotification"
         static let Identifier = "SHRangeNotificationIdentifier"
         static let Proximity  = "SHRangeNotificationProximity"
@@ -20,19 +22,23 @@ class Monitor {
     
     // MARK: - iBeacons handler
     
-    fileprivate class LocationHandler: NSObject, CLLocationManagerDelegate {
-        @objc func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
+    private class LocationHandler: NSObject, CLLocationManagerDelegate
+    {
+        @objc func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion)
+        {
             var userInfo: [AnyHashable: Any] = [:]
             
             let currentTime = Date.timeIntervalSinceReferenceDate
             
-            for beacon: CLBeacon in beacons {
+            for beacon: CLBeacon in beacons
+            {
                 // Log to DB
                 let dbBeacon = Beacon(name: region.identifier, uuid: beacon.proximityUUID.uuidString, supportsIBeacon: true)
                 Database.sharedDatabase.logRange(beacon.rssi, forBeacon: dbBeacon, time: currentTime)
                 
                 // Broadcast notification
-                let beaconInfo: [AnyHashable: Any] = [
+                let beaconInfo: [AnyHashable: Any] =
+                [
                     RangeNotification.Name : region.identifier,
                     RangeNotification.Proximity  : beacon.proximity.rawValue,
                     RangeNotification.RSSI  : beacon.rssi
@@ -47,53 +53,64 @@ class Monitor {
         }
     }
     
-    fileprivate class func locationManager() -> CLLocationManager {
-        struct Holder {
+    private class func locationManager() -> CLLocationManager
+    {
+        struct Holder
+        {
             static let instance: CLLocationManager = CLLocationManager()
         }
         
         return Holder.instance
     }
     
-    fileprivate static var handler: LocationHandler?
+    private static var handler: LocationHandler?
     
     // MARK: - Bluetooth Devices handler
     
-    fileprivate class BluetoothDevicesHandler: NSObject, CBCentralManagerDelegate {
-        fileprivate var devices: [String:Beacon]
+    private class BluetoothDevicesHandler: NSObject, CBCentralManagerDelegate
+    {
+        private var devices: [String: Beacon]
         
-        init(devices: [Beacon]) {
+        init(devices: [Beacon])
+        {
             self.devices = [:]
             
-            for device in devices {
+            for device in devices
+            {
                 self.devices[device.name] = device
             }
         }
         
-        @objc fileprivate func centralManagerDidUpdateState(_ central: CBCentralManager) {
-            if central.state == .poweredOn {
+        @objc fileprivate func centralManagerDidUpdateState(_ central: CBCentralManager)
+        {
+            if central.state == .poweredOn
+            {
                 central.scanForPeripherals(withServices: nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
             }
-            else {
+            else
+            {
                 print(central.state)
             }
         }
         
-        @objc fileprivate func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        @objc fileprivate func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber)
+        {
             if let name = peripheral.name,
-               let device = devices[name] {
+               let device = devices[name]
+            {
                 let currentTime = Date.timeIntervalSinceReferenceDate
                 Database.sharedDatabase.logRange(RSSI.intValue, forBeacon: device, time: currentTime)
             }
         }
     }
     
-    fileprivate static var bluetoothCentralManager: CBCentralManager?
-    fileprivate static var bluetoothDevicesHandler: BluetoothDevicesHandler?
+    private static var bluetoothCentralManager: CBCentralManager?
+    private static var bluetoothDevicesHandler: BluetoothDevicesHandler?
     
     // MARK: - Monotoring control
     
-    class func start(_ beacons: [Beacon]) {
+    class func start(_ beacons: [Beacon])
+    {
         stop(beacons)
         
         let lm = locationManager()
@@ -102,8 +119,10 @@ class Monitor {
         let handler = LocationHandler()
         lm.delegate = handler
         
-        for beacon in beacons {
-            if !beacon.supportsIBeacon {
+        for beacon in beacons
+        {
+            if !beacon.supportsIBeacon
+            {
                 continue
             }
             
@@ -123,11 +142,14 @@ class Monitor {
         bluetoothCentralManager = CBCentralManager(delegate: bluetoothDevicesHandler, queue: nil)
     }
     
-    class func stop(_ beacons: [Beacon]) {
+    class func stop(_ beacons: [Beacon])
+    {
         let lm = locationManager()
         
-        for beacon in beacons {
-            if !beacon.supportsIBeacon {
+        for beacon in beacons
+        {
+            if !beacon.supportsIBeacon
+            {
                 continue
             }
             

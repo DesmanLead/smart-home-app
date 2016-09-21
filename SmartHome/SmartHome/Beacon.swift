@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct Beacon {
+struct Beacon
+{
     let name: String
     let uuid: String
     let supportsIBeacon: Bool

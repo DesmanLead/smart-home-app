@@ -8,60 +8,71 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDataSource
+{
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var devicesTable: UITableView!
     var devices: [Device]!
     
-    @IBAction func onStart() {
+    @IBAction func onStart()
+    {
         label.text = "started"
         
         Monitor.start(Database.sharedDatabase.getBeacons())
         HeartRateMonitor.sharedMonitor.start()
     }
     
-    @IBAction func onStop() {
+    @IBAction func onStop()
+    {
         Monitor.stop(Database.sharedDatabase.getBeacons())
         HeartRateMonitor.sharedMonitor.stop()
         
         label.text = "stopped"
     }
     
-    @IBAction func onDump() {
+    @IBAction func onDump()
+    {
         Database.sharedDatabase.dump()
         
         label.text = "dumped"
     }
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         devices = Database.sharedDatabase.getDevices()
         label.text = ""
         devicesTable.dataSource = self
     }
     
-    func onRangeData(_ notification: Notification) {
+    func onRangeData(_ notification: Notification)
+    {
         label.text = (notification as NSNotification).userInfo?.description
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool)
+    {
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.onRangeData(_:)), name: NSNotification.Name(rawValue: Monitor.RangeNotification.Name), object: nil)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool)
+    {
         NotificationCenter.default.removeObserver(self)
     }
     
     
     // MARK: - UITableViewDataSource
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
         return devices.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "deviceCell") as? DeviceTableCell else { fatalError() }
         
-        let device = devices[(indexPath as NSIndexPath).row]
+        let index = indexPath.row
+        let device = devices[index]
         
         cell.deviceName = device.name
         cell.deviceEnabled = device.isEnabled
@@ -71,6 +82,7 @@ class ViewController: UIViewController, UITableViewDataSource {
             
             var updatedDevice = device
             updatedDevice.isEnabled = isEnabled
+            self.devices[index] = updatedDevice
             Database.sharedDatabase.logDeviceState(updatedDevice, time: Date.timeIntervalSinceReferenceDate)
         }
         
