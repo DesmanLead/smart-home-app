@@ -99,9 +99,9 @@ class Database
     {
         return [
             Beacon(name: "KitchenBeacon0", uuid: "EBEFD083-70A2-47C8-9837-E7B5634DF524", supportsIBeacon: true),
-            Beacon(name: "HallBeacon1", uuid: "EBEFD083-70A2-47C8-9837-E7B5634DF525", supportsIBeacon: true),
+            Beacon(name: "BedroomBeacon1", uuid: "EBEFD083-70A2-47C8-9837-E7B5634DF525", supportsIBeacon: true),
             Beacon(name: "ToiletBeacon2", uuid: "EBEFD083-70A2-47C8-9837-E7B5634DF526", supportsIBeacon: true),
-            Beacon(name: "Beacon3", uuid: "EBEFD083-70A2-47C8-9837-E7B5634DF527", supportsIBeacon: true),
+            Beacon(name: "BathroomBeacon3", uuid: "EBEFD083-70A2-47C8-9837-E7B5634DF527", supportsIBeacon: true),
             Beacon(name: "KitchenBeacon4", uuid: "EBEFD083-70A2-47C8-9837-E7B5634DF528", supportsIBeacon: true),
             Beacon(name: "Apple TV", uuid: "3ec3d2ca-4624-4943-a2f6-69e222c57393", supportsIBeacon: false),
             Beacon(name: "MI_SCALE", uuid: "bc3c94b6-9c70-4e2c-9205-0b5d3476c7d6", supportsIBeacon: false)
