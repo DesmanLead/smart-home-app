@@ -17,10 +17,18 @@
 		7C60D5F91A014886009D8055 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C60D5F71A014886009D8055 /* LaunchScreen.xib */; };
 		7C60D6051A014886009D8055 /* SmartHomeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C60D6041A014886009D8055 /* SmartHomeTests.swift */; };
 		7C939E701D882DB60059B471 /* HeartRateMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C939E6F1D882DB60059B471 /* HeartRateMonitor.swift */; };
+		7CADBBAE1DDE2B0100909CAF /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CADBBAD1DDE2B0100909CAF /* HealthKit.framework */; };
 		7CB2CC4C1A0261E60025AB04 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2CC4B1A0261E60025AB04 /* Database.swift */; };
 		7CB2CC501A0262650025AB04 /* Beacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2CC4F1A0262650025AB04 /* Beacon.swift */; };
 		7CB2CC521A02647D0025AB04 /* Monitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB2CC511A02647D0025AB04 /* Monitor.swift */; };
 		7CBA15FD1C78AFAE00DF4DA1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C60D6111A014AF3009D8055 /* CoreLocation.framework */; };
+		7CD5FD211DCB782C00C16C73 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CD5FD1F1DCB782C00C16C73 /* Interface.storyboard */; };
+		7CD5FD231DCB782C00C16C73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CD5FD221DCB782C00C16C73 /* Assets.xcassets */; };
+		7CD5FD2A1DCB782C00C16C73 /* HeartRateMonitor Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 7CD5FD291DCB782C00C16C73 /* HeartRateMonitor Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		7CD5FD2F1DCB782C00C16C73 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD5FD2E1DCB782C00C16C73 /* InterfaceController.swift */; };
+		7CD5FD311DCB782C00C16C73 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CD5FD301DCB782C00C16C73 /* ExtensionDelegate.swift */; };
+		7CD5FD331DCB782C00C16C73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CD5FD321DCB782C00C16C73 /* Assets.xcassets */; };
+		7CD5FD371DCB782C00C16C73 /* HeartRateMonitor.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 7CD5FD1D1DCB782C00C16C73 /* HeartRateMonitor.app */; };
 		D2B4A4E047FBD1925412CB63 /* libPods-SmartHomeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8211078C00CFC8BEAFAD6C76 /* libPods-SmartHomeTests.a */; };
 		D328CE861D80D225008C4EB1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D328CE851D80D225008C4EB1 /* CoreBluetooth.framework */; };
 		F2CB13FD8AA070E4BE7E4CF0 /* libPods-SmartHome.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15F0D0E0AF74587D4251C052 /* libPods-SmartHome.a */; };
@@ -34,7 +42,46 @@
 			remoteGlobalIDString = 7C60D5E81A014885009D8055;
 			remoteInfo = SmartHome;
 		};
+		7CD5FD2B1DCB782C00C16C73 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7C60D5E11A014885009D8055 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7CD5FD281DCB782C00C16C73;
+			remoteInfo = "HeartRateMonitor Extension";
+		};
+		7CD5FD351DCB782C00C16C73 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7C60D5E11A014885009D8055 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7CD5FD1C1DCB782C00C16C73;
+			remoteInfo = HeartRateMonitor;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7CD5FD3D1DCB782C00C16C73 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				7CD5FD2A1DCB782C00C16C73 /* HeartRateMonitor Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7CD5FD3F1DCB782C00C16C73 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				7CD5FD371DCB782C00C16C73 /* HeartRateMonitor.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		15F0D0E0AF74587D4251C052 /* libPods-SmartHome.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SmartHome.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,9 +103,20 @@
 		7C60D6041A014886009D8055 /* SmartHomeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartHomeTests.swift; sourceTree = "<group>"; };
 		7C60D6111A014AF3009D8055 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		7C939E6F1D882DB60059B471 /* HeartRateMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartRateMonitor.swift; sourceTree = "<group>"; };
+		7CADBBAC1DDE2B0100909CAF /* HeartRateMonitor Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "HeartRateMonitor Extension.entitlements"; sourceTree = "<group>"; };
+		7CADBBAD1DDE2B0100909CAF /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS3.1.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
 		7CB2CC4B1A0261E60025AB04 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		7CB2CC4F1A0262650025AB04 /* Beacon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Beacon.swift; sourceTree = "<group>"; };
 		7CB2CC511A02647D0025AB04 /* Monitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monitor.swift; sourceTree = "<group>"; };
+		7CD5FD1D1DCB782C00C16C73 /* HeartRateMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeartRateMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CD5FD201DCB782C00C16C73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		7CD5FD221DCB782C00C16C73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7CD5FD241DCB782C00C16C73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7CD5FD291DCB782C00C16C73 /* HeartRateMonitor Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "HeartRateMonitor Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CD5FD2E1DCB782C00C16C73 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		7CD5FD301DCB782C00C16C73 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		7CD5FD321DCB782C00C16C73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7CD5FD341DCB782C00C16C73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8211078C00CFC8BEAFAD6C76 /* libPods-SmartHomeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SmartHomeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BA372FE63023CF3C00E3AAB /* Pods-SmartHomeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHomeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHomeTests/Pods-SmartHomeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9C6694F5E3017B7C6987F6C2 /* Pods-SmartHome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartHome.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartHome/Pods-SmartHome.release.xcconfig"; sourceTree = "<group>"; };
@@ -85,6 +143,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7CD5FD261DCB782C00C16C73 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CADBBAE1DDE2B0100909CAF /* HealthKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -102,6 +168,7 @@
 		61CB1DE3F349495A97032342 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7CADBBAD1DDE2B0100909CAF /* HealthKit.framework */,
 				7C07D0791D871869007C1287 /* HealthKit.framework */,
 				D328CE851D80D225008C4EB1 /* CoreBluetooth.framework */,
 				15F0D0E0AF74587D4251C052 /* libPods-SmartHome.a */,
@@ -133,6 +200,8 @@
 				7C60D6111A014AF3009D8055 /* CoreLocation.framework */,
 				7C60D5EB1A014886009D8055 /* SmartHome */,
 				7C60D6011A014886009D8055 /* SmartHomeTests */,
+				7CD5FD1E1DCB782C00C16C73 /* HeartRateMonitor */,
+				7CD5FD2D1DCB782C00C16C73 /* HeartRateMonitor Extension */,
 				7C60D5EA1A014886009D8055 /* Products */,
 				03FDA2DB1033491844DD6790 /* Pods */,
 				61CB1DE3F349495A97032342 /* Frameworks */,
@@ -144,6 +213,8 @@
 			children = (
 				7C60D5E91A014886009D8055 /* SmartHome.app */,
 				7C60D5FE1A014886009D8055 /* SmartHomeTests.xctest */,
+				7CD5FD1D1DCB782C00C16C73 /* HeartRateMonitor.app */,
+				7CD5FD291DCB782C00C16C73 /* HeartRateMonitor Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -208,6 +279,28 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		7CD5FD1E1DCB782C00C16C73 /* HeartRateMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				7CD5FD1F1DCB782C00C16C73 /* Interface.storyboard */,
+				7CD5FD221DCB782C00C16C73 /* Assets.xcassets */,
+				7CD5FD241DCB782C00C16C73 /* Info.plist */,
+			);
+			path = HeartRateMonitor;
+			sourceTree = "<group>";
+		};
+		7CD5FD2D1DCB782C00C16C73 /* HeartRateMonitor Extension */ = {
+			isa = PBXGroup;
+			children = (
+				7CADBBAC1DDE2B0100909CAF /* HeartRateMonitor Extension.entitlements */,
+				7CD5FD2E1DCB782C00C16C73 /* InterfaceController.swift */,
+				7CD5FD301DCB782C00C16C73 /* ExtensionDelegate.swift */,
+				7CD5FD321DCB782C00C16C73 /* Assets.xcassets */,
+				7CD5FD341DCB782C00C16C73 /* Info.plist */,
+			);
+			path = "HeartRateMonitor Extension";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -221,10 +314,12 @@
 				7C60D5E71A014885009D8055 /* Resources */,
 				FB2F2DA69F00581E8504510B /* 📦 Embed Pods Frameworks */,
 				905917DA95CC0FBB4E9C5D4C /* 📦 Copy Pods Resources */,
+				7CD5FD3F1DCB782C00C16C73 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				7CD5FD361DCB782C00C16C73 /* PBXTargetDependency */,
 			);
 			name = SmartHome;
 			productName = SmartHome;
@@ -252,6 +347,40 @@
 			productReference = 7C60D5FE1A014886009D8055 /* SmartHomeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		7CD5FD1C1DCB782C00C16C73 /* HeartRateMonitor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7CD5FD3E1DCB782C00C16C73 /* Build configuration list for PBXNativeTarget "HeartRateMonitor" */;
+			buildPhases = (
+				7CD5FD1B1DCB782C00C16C73 /* Resources */,
+				7CD5FD3D1DCB782C00C16C73 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7CD5FD2C1DCB782C00C16C73 /* PBXTargetDependency */,
+			);
+			name = HeartRateMonitor;
+			productName = HeartRateMonitor;
+			productReference = 7CD5FD1D1DCB782C00C16C73 /* HeartRateMonitor.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		7CD5FD281DCB782C00C16C73 /* HeartRateMonitor Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7CD5FD3C1DCB782C00C16C73 /* Build configuration list for PBXNativeTarget "HeartRateMonitor Extension" */;
+			buildPhases = (
+				7CD5FD251DCB782C00C16C73 /* Sources */,
+				7CD5FD261DCB782C00C16C73 /* Frameworks */,
+				7CD5FD271DCB782C00C16C73 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "HeartRateMonitor Extension";
+			productName = "HeartRateMonitor Extension";
+			productReference = 7CD5FD291DCB782C00C16C73 /* HeartRateMonitor Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -259,7 +388,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0810;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Desman;
 				TargetAttributes = {
@@ -284,6 +413,26 @@
 						LastSwiftMigration = 0800;
 						TestTargetID = 7C60D5E81A014885009D8055;
 					};
+					7CD5FD1C1DCB782C00C16C73 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 6343C72SQK;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes.watchos.app = {
+								enabled = 0;
+							};
+						};
+					};
+					7CD5FD281DCB782C00C16C73 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 6343C72SQK;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.HealthKit.watchos = {
+								enabled = 1;
+							};
+						};
+					};
 				};
 			};
 			buildConfigurationList = 7C60D5E41A014885009D8055 /* Build configuration list for PBXProject "SmartHome" */;
@@ -301,6 +450,8 @@
 			targets = (
 				7C60D5E81A014885009D8055 /* SmartHome */,
 				7C60D5FD1A014886009D8055 /* SmartHomeTests */,
+				7CD5FD1C1DCB782C00C16C73 /* HeartRateMonitor */,
+				7CD5FD281DCB782C00C16C73 /* HeartRateMonitor Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -320,6 +471,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7CD5FD1B1DCB782C00C16C73 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CD5FD231DCB782C00C16C73 /* Assets.xcassets in Resources */,
+				7CD5FD211DCB782C00C16C73 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7CD5FD271DCB782C00C16C73 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CD5FD331DCB782C00C16C73 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,6 +610,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7CD5FD251DCB782C00C16C73 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CD5FD311DCB782C00C16C73 /* ExtensionDelegate.swift in Sources */,
+				7CD5FD2F1DCB782C00C16C73 /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -449,6 +626,16 @@
 			isa = PBXTargetDependency;
 			target = 7C60D5E81A014885009D8055 /* SmartHome */;
 			targetProxy = 7C60D5FF1A014886009D8055 /* PBXContainerItemProxy */;
+		};
+		7CD5FD2C1DCB782C00C16C73 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7CD5FD281DCB782C00C16C73 /* HeartRateMonitor Extension */;
+			targetProxy = 7CD5FD2B1DCB782C00C16C73 /* PBXContainerItemProxy */;
+		};
+		7CD5FD361DCB782C00C16C73 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7CD5FD1C1DCB782C00C16C73 /* HeartRateMonitor */;
+			targetProxy = 7CD5FD351DCB782C00C16C73 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -467,6 +654,14 @@
 				7C60D5F81A014886009D8055 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		7CD5FD1F1DCB782C00C16C73 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7CD5FD201DCB782C00C16C73 /* Base */,
+			);
+			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -635,6 +830,102 @@
 			};
 			name = Release;
 		};
+		7CD5FD381DCB782C00C16C73 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 6343C72SQK;
+				IBSC_MODULE = HeartRateMonitor_Extension;
+				INFOPLIST_FILE = HeartRateMonitor/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.desman.SmartHome.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.1;
+			};
+			name = Debug;
+		};
+		7CD5FD391DCB782C00C16C73 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 6343C72SQK;
+				IBSC_MODULE = HeartRateMonitor_Extension;
+				INFOPLIST_FILE = HeartRateMonitor/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.desman.SmartHome.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.1;
+			};
+			name = Release;
+		};
+		7CD5FD3A1DCB782C00C16C73 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_ENTITLEMENTS = "HeartRateMonitor Extension/HeartRateMonitor Extension.entitlements";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 6343C72SQK;
+				INFOPLIST_FILE = "HeartRateMonitor Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.desman.SmartHome.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.1;
+			};
+			name = Debug;
+		};
+		7CD5FD3B1DCB782C00C16C73 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_ENTITLEMENTS = "HeartRateMonitor Extension/HeartRateMonitor Extension.entitlements";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 6343C72SQK;
+				INFOPLIST_FILE = "HeartRateMonitor Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.desman.SmartHome.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.1;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -661,6 +952,24 @@
 			buildConfigurations = (
 				7C60D60C1A014886009D8055 /* Debug */,
 				7C60D60D1A014886009D8055 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7CD5FD3C1DCB782C00C16C73 /* Build configuration list for PBXNativeTarget "HeartRateMonitor Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7CD5FD3A1DCB782C00C16C73 /* Debug */,
+				7CD5FD3B1DCB782C00C16C73 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7CD5FD3E1DCB782C00C16C73 /* Build configuration list for PBXNativeTarget "HeartRateMonitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7CD5FD381DCB782C00C16C73 /* Debug */,
+				7CD5FD391DCB782C00C16C73 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

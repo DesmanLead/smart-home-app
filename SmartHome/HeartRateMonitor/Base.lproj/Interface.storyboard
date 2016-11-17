@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11508"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="HeartRateMonitor" customModuleProvider="target">
+                    <items>
+                        <label width="1" alignment="left" verticalAlignment="center" text="-" textAlignment="center" id="G4w-hv-yOA" userLabel="Heart Rate"/>
+                        <button width="1" alignment="left" verticalAlignment="bottom" title="Start" id="WXh-eU-G56">
+                            <connections>
+                                <action selector="startBtnTapped" destination="AgC-eL-Hgc" id="GKZ-ne-2cf"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="button" destination="WXh-eU-G56" id="kb9-Hv-a8l"/>
+                        <outlet property="heartRateLabel" destination="G4w-hv-yOA" id="j1Q-kW-UiP"/>
+                    </connections>
+                </controller>
+            </objects>
+        </scene>
+    </scenes>
+</document>
