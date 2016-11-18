@@ -8,92 +8,58 @@
 
 import Foundation
 import HealthKit
+import WatchConnectivity
 
-class HeartRateMonitor
+class HeartRateMonitor: NSObject, WCSessionDelegate
 {
     static let sharedMonitor = HeartRateMonitor()
     
-    private let healthKitStore = HKHealthStore()
-    private var query: HKQuery?
+    private var session: WCSession?
     
     func start()
     {
-        let heartRateType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)!
-        let heartRateUnit = HKUnit(from: "count/min")
-        let healthKitTypes: Set = [ heartRateType ]
-
-        healthKitStore.requestAuthorization(toShare: nil, read: healthKitTypes) {
-            _, _ in
-            
-            let queryPredicate  = HKQuery.predicateForSamples(withStart: Date().addingTimeInterval(-600), end: nil, options: [])
-
-            let query: HKAnchoredObjectQuery = HKAnchoredObjectQuery(type: heartRateType,
-                                                                     predicate: queryPredicate,
-                                                                     anchor: nil,
-                                                                     limit: HKObjectQueryNoLimit) {
-                query, samples, deletedObjects, anchor, error in
-
-                if let errorFound = error
-                {
-                    print("query error: \(errorFound.localizedDescription)")
-                    return
-                }
-
-                guard let samples = samples else
-                {
-                    return
-                }
-
-                for sample in samples
-                {
-                    if let quantitySample = sample as? HKQuantitySample
-                    {
-                        let heartRate = quantitySample.quantity.doubleValue(for: heartRateUnit)
-                        let time = quantitySample.endDate
-                        
-                        print("\(quantitySample.startDate) — \(time) : \(heartRate)")
-                        Database.sharedDatabase.logHeartRate(rate: heartRate, time: time.timeIntervalSinceReferenceDate)
-                    }
-                }
-            }
-            
-            query.updateHandler = {
-                query, samples, deletedObjects, anchor, error in
-                
-                if let errorFound = error
-                {
-                    print("query error: \(errorFound.localizedDescription)")
-                    return
-                }
-                
-                guard let samples = samples else
-                {
-                    return
-                }
-                
-                for sample in samples
-                {
-                    if let quantitySample = sample as? HKQuantitySample
-                    {
-                        let heartRate = quantitySample.quantity.doubleValue(for: heartRateUnit)
-                        let time = quantitySample.endDate
-                        
-                        print("\(quantitySample.startDate) — \(time) : \(heartRate)")
-                        Database.sharedDatabase.logHeartRate(rate: heartRate, time: time.timeIntervalSinceReferenceDate)
-                    }
-                }
-            }
-                      
-            self.healthKitStore.execute(query)
-            self.query = query
+        if session == nil
+        {
+            session = WCSession.default()
+            session?.delegate = self
+            session?.activate()
         }
     }
     
     func stop()
     {
-        if let query = self.query
+        // Not required yet
+    }
+    
+    // - MARK: WCSessionDelegate
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?)
+    {
+        guard activationState == .activated else
         {
-            healthKitStore.stop(query)
+            print(error?.localizedDescription ?? "unknow error while activating WCSession")
+            return
         }
+    }
+    
+    func sessionDidBecomeInactive(_ session: WCSession)
+    {
+        // No need to support
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession)
+    {
+        // No need to support
+    }
+    
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any])
+    {
+        guard let heartRate = message["rate"] as? Double else
+        {
+            print("unexpected message: \(message)")
+            return
+        }
+        
+        print("rate: \(heartRate)")
+        Database.sharedDatabase.logHeartRate(rate: heartRate, time: Date.timeIntervalSinceReferenceDate)
     }
 }

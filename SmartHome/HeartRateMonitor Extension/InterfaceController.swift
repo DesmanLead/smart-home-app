@@ -9,9 +9,10 @@
 import WatchKit
 import Foundation
 import HealthKit
+import WatchConnectivity
 
 
-class InterfaceController: WKInterfaceController, HKWorkoutSessionDelegate
+class InterfaceController: WKInterfaceController, HKWorkoutSessionDelegate, WCSessionDelegate
 {
     @IBOutlet var heartRateLabel: WKInterfaceLabel!
     @IBOutlet var button: WKInterfaceButton!
@@ -23,6 +24,10 @@ class InterfaceController: WKInterfaceController, HKWorkoutSessionDelegate
     var session: HKWorkoutSession?
     let heartRateUnit = HKUnit(from: "count/min")
     var currenQuery : HKQuery?
+    
+    // iPhone app connection
+    var connectSession: WCSession? = nil
+    var isSessionActive: Bool = false
     
     override func willActivate()
     {
@@ -49,6 +54,13 @@ class InterfaceController: WKInterfaceController, HKWorkoutSessionDelegate
             {
                 self.displayNotAllowed()
             }
+        }
+        
+        if connectSession == nil
+        {
+            connectSession = WCSession.default()
+            connectSession?.delegate = self
+            connectSession?.activate()
         }
     }
     
@@ -167,11 +179,34 @@ class InterfaceController: WKInterfaceController, HKWorkoutSessionDelegate
             return
         }
         
+        guard let sample = heartRateSamples.first else
+        {
+            return
+        }
+        
+        let value = sample.quantity.doubleValue(for: self.heartRateUnit)
+        
+        if isSessionActive
+        {
+            connectSession?.sendMessage(["rate" : value], replyHandler: nil, errorHandler: nil)
+        }
+        
         DispatchQueue.main.async
         {
-            guard let sample = heartRateSamples.first else{return}
-            let value = sample.quantity.doubleValue(for: self.heartRateUnit)
             self.heartRateLabel.setText(String(UInt16(value)))
         }
+    }
+    
+    
+    // - MARK: WCSessionDelegate
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?)
+    {
+        guard activationState == .activated else
+        {
+            print(error?.localizedDescription ?? "unknown error while activating WKSession")
+            return
+        }
+        
+        isSessionActive = true
     }
 }
