@@ -42,6 +42,8 @@ class ViewController: UIViewController, UITableViewDataSource
         devices = Database.sharedDatabase.getDevices()
         label.text = ""
         devicesTable.dataSource = self
+        
+        self.updateUI()
     }
     
     func onRangeData(_ notification: Notification)
@@ -84,9 +86,28 @@ class ViewController: UIViewController, UITableViewDataSource
             updatedDevice.isEnabled = isEnabled
             self.devices[index] = updatedDevice
             Database.sharedDatabase.logDeviceState(updatedDevice, time: Date.timeIntervalSinceReferenceDate)
+            
+            self.updateUI()
         }
         
         return cell
+    }
+    
+    private func updateUI()
+    {
+        devices.sort
+        {
+            lhs, rhs in
+            
+            if lhs.isEnabled == rhs.isEnabled
+            {
+                return lhs.name.compare(rhs.name) == .orderedAscending
+            }
+            
+            return lhs.isEnabled
+        }
+        
+        self.devicesTable.reloadSections(IndexSet(integer: 0), with: .automatic)
     }
 }
 

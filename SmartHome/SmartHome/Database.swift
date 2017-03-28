@@ -75,6 +75,18 @@ class Database
         writeLine(csv)
     }
     
+    func logActivity(_ activity: Activity, time: TimeInterval)
+    {
+        let csv = [
+            "\(time)",
+            activity.identifier,
+            "\(activity.isStarted ? 1 : 0)",
+            activity.name
+            ].joined(separator: Database.Delimiter)
+        
+        writeLine(csv)
+    }
+    
     func logHeartRate(rate: Double, time: TimeInterval)
     {
         let csv = [
@@ -123,6 +135,23 @@ class Database
             Device(identifier: "dcdb6cef-f9b3-461e-81b2-54ad37736ef4", name: "Kitchen Water", isEnabled: false),
             Device(identifier: "1d145529-a34b-4b9c-94dc-df1021589cd9", name: "Bathroom Water", isEnabled: false),
             Device(identifier: "a9a2eefe-f409-45b2-92ee-d5e5cd3d29c2", name: "Bathroom Shower", isEnabled: false)
+        ]
+    }
+    
+    func getActivities() -> [Activity]
+    {
+        return [
+            Activity(identifier: "7c5d5f96-4667-4d35-9bf1-4cf604e2bc35", name: "Watching TV", isStarted: false),
+            Activity(identifier: "c1678225-c5cf-4399-ad48-0703dc718a86", name: "Shower", isStarted: false),
+            Activity(identifier: "3db877ff-bd74-4ddc-a3ec-939c57b364a3", name: "Washing hands", isStarted: false),
+            Activity(identifier: "65865b45-765b-4038-9e92-d9a5c358fba9", name: "Breakfast", isStarted: false),
+            Activity(identifier: "7ba1ee75-a15f-467a-8bdc-9cb49efdef77", name: "Dinner", isStarted: false),
+            Activity(identifier: "f3ea9886-d956-4a7a-b9c4-95edaba56e13", name: "Cooking breakfast", isStarted: false),
+            Activity(identifier: "ba0f9491-dea3-4059-b4ad-7bd08cabe1aa", name: "Cooking dinner", isStarted: false),
+            Activity(identifier: "7e9cac8b-cca2-4396-b325-23edc21fde3a", name: "Toilet", isStarted: false),
+            Activity(identifier: "4174d1ab-cbe7-44e8-a72e-4d6b04ae7eb7", name: "Entered home", isStarted: false),
+            Activity(identifier: "5d98492f-f954-4419-a59f-d53d9fd44ef9", name: "Leaving home", isStarted: false),
+            Activity(identifier: "6242f8db-b666-4f50-8b64-05435d601aa7", name: "Preparing to sleep", isStarted: false)
         ]
     }
 }
