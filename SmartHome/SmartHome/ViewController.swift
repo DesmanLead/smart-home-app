@@ -13,9 +13,12 @@ class ViewController: UIViewController, UITableViewDataSource
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var devicesTable: UITableView!
     var devices: [Device]!
+    var discoveredBeaconUuids: Set<String> = []
+    var isStarted: Bool = false
     
     @IBAction func onStart()
     {
+        isStarted = true
         label.text = "started"
         
         Monitor.start(Database.sharedDatabase.getBeacons())
@@ -24,8 +27,11 @@ class ViewController: UIViewController, UITableViewDataSource
     
     @IBAction func onStop()
     {
+        isStarted = false
         Monitor.stop(Database.sharedDatabase.getBeacons())
         HeartRateMonitor.sharedMonitor.stop()
+        
+        discoveredBeaconUuids = []
         
         label.text = "stopped"
     }
@@ -48,7 +54,20 @@ class ViewController: UIViewController, UITableViewDataSource
     
     func onRangeData(_ notification: Notification)
     {
-        label.text = (notification as NSNotification).userInfo?.description
+        guard let userInfo = notification.userInfo as? [String: Any] else
+        {
+            return
+        }
+        
+        DispatchQueue.main.async
+        {
+            if self.isStarted
+            {
+                self.discoveredBeaconUuids.formUnion(userInfo.keys)
+                
+                self.label.text = "Discovered \(self.discoveredBeaconUuids.count) beacons"
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool)
