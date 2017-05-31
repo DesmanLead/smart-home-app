@@ -26,7 +26,6 @@ class InterfaceController: WKInterfaceController, HKWorkoutSessionDelegate, WCSe
     var currenQuery : HKQuery?
     
     // iPhone app connection
-    var connectSession: WCSession? = nil
     var isSessionActive: Bool = false
     
     override func willActivate()
@@ -56,12 +55,9 @@ class InterfaceController: WKInterfaceController, HKWorkoutSessionDelegate, WCSe
             }
         }
         
-        if connectSession == nil
-        {
-            connectSession = WCSession.default()
-            connectSession?.delegate = self
-            connectSession?.activate()
-        }
+        let connectSession = WCSession.default()
+        connectSession.delegate = self
+        connectSession.activate()
     }
     
     func displayNotAllowed()
@@ -73,12 +69,12 @@ class InterfaceController: WKInterfaceController, HKWorkoutSessionDelegate, WCSe
     {
         switch toState
         {
-        case .running:
-            workoutDidStart(date)
-        case .ended:
-            workoutDidEnd(date)
-        default:
-            print("Unexpected state \(toState)")
+            case .running:
+                workoutDidStart(date)
+            case .ended:
+                workoutDidEnd(date)
+            default:
+                print("Unexpected state \(toState)")
         }
     }
     
@@ -188,7 +184,7 @@ class InterfaceController: WKInterfaceController, HKWorkoutSessionDelegate, WCSe
         
         if isSessionActive
         {
-            connectSession?.sendMessage(["rate" : value], replyHandler: nil, errorHandler: nil)
+            WCSession.default().sendMessage(["rate" : value], replyHandler: nil, errorHandler: nil)
         }
         
         DispatchQueue.main.async
