@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import HealthKit
 
 class ViewController: UIViewController, UITableViewDataSource
 {
@@ -50,6 +51,28 @@ class ViewController: UIViewController, UITableViewDataSource
         devicesTable.dataSource = self
         
         self.updateUI()
+        
+        self.requestHeartRatePermission()
+    }
+    
+    func requestHeartRatePermission()
+    {
+        guard let quantityType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate) else
+        {
+            return
+        }
+        
+        let dataTypes = Set(arrayLiteral: quantityType)
+        HKHealthStore().requestAuthorization(toShare: nil, read: dataTypes)
+        {
+            (success, error) -> Void in
+            
+            if !success
+            {
+                self.label.text = "Unable to get heart rate permission"
+            }
+        }
+
     }
     
     func onRangeData(_ notification: Notification)
